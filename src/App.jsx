@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Footer from './components/admin/Footer';
+import Navbar from './components/admin/Navbar';
+import Sidebar from './components/admin/Sidebar';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div id="page-top">
+      {/* Page Wrapper */}
+      <div id="wrapper">
+        {/* Sidebar */}
+        <Sidebar />
+        {/* End of Sidebar */}
+
+        {/* Content Wrapper */}
+        <div id="content-wrapper" class="d-flex flex-column">
+          {/* Main Content */}
+          <div id="content">
+            {/* Topbar */}
+            <Navbar />
+            {/* End of Topbar */}
+
+            {/* Begin Page Content */}
+            <div class="container-fluid">
+              {/* Tempatkan konten Anda di sini */}
+              <h1>Welcome to the Admin Dashboard!</h1>
+            </div>
+            {/* /.container-fluid */}
+          </div>
+          {/* End of Main Content */}
+
+          {/* Footer */}
+          <Footer />
+          {/* End of Footer */}
+        </div>
+        {/* End of Content Wrapper */}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      {/* End of Page Wrapper */}
+
+      {/* Scroll to Top Button */}
+      <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+      </a>
+    </div>
+  );
 }
 
-export default App
+export default App;
