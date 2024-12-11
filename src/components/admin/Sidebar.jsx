@@ -35,9 +35,10 @@ function Sidebar() {
 
             {/* Nav Item - pelanggan */}
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                <i class="fas fa-fw fa-users"></i>
-                <span>Pelanggan</span></a>
+            <Link to="/admin/Pelanggan" className="nav-link">
+                <i class="fa-solid fa-users"></i>
+                <span>Pelanggan</span>
+             </Link> 
             </li> 
 
             {/* Nav Item - reservasi */}
