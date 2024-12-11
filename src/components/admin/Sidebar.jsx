@@ -40,11 +40,12 @@ function Sidebar() {
                 <span>Pelanggan</span></a>
             </li> 
 
-            {/* Nav Item - pelanggan */}
+            {/* Nav Item - reservasi */}
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+            <Link to="/admin/reservasi" className="nav-link">
                 <i class="fa-solid fa-calendar"></i>
-                <span>Reservasi</span></a>
+                <span>Reservasi</span>
+             </Link>   
             </li>
 
             <li class="nav-item">
