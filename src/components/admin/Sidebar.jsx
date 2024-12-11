@@ -22,10 +22,10 @@ function Sidebar() {
 
         {/* Nav Item - Dashboard */}
         <li className="nav-item">
-          <a className="nav-link" href="index.html">
+            <Link to="/admin" className="nav-link">
             <i className="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
-          </a>
+            </Link>
         </li>
 
         {/* Divider */}
