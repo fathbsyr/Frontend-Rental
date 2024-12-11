@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Sidebar() {
     return (
         <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -13,7 +15,7 @@ function Sidebar() {
             <hr className="sidebar-divider my-0" />
 
             {/* Nav Item - Dashboard */}
-            <li className="nav-item active">
+            <li className="nav-item">
                 <a className="nav-link" href="index.html">
                     <i className="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
@@ -24,10 +26,11 @@ function Sidebar() {
             <hr className="sidebar-divider" />
 
             {/* Nav Item - mobil */}
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                <i className="fas fa-fw fa-car"></i>
-                <span>Mobil</span></a>
+            <li className="nav-item">
+                <Link to="/admin/mobil" className="nav-link">
+                    <i className="fas fa-fw fa-car"></i>
+                    <span>Mobil</span>
+                </Link>
             </li>
 
             {/* Nav Item - pelanggan */}

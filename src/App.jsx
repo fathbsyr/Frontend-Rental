@@ -1,46 +1,30 @@
 import Footer from './components/admin/Footer';
 import Navbar from './components/admin/Navbar';
 import Sidebar from './components/admin/Sidebar';
+import { BrowserRouter as Router } from "react-router-dom";
+import AppRoutes from './Routes/Routes';
 
 function App() {
   return (
-    <div id="page-top">
-      {/* Page Wrapper */}
-      <div id="wrapper">
-        {/* Sidebar */}
-        <Sidebar />
-        {/* End of Sidebar */}
-
-        {/* Content Wrapper */}
-        <div id="content-wrapper" class="d-flex flex-column">
-          {/* Main Content */}
-          <div id="content">
-            {/* Topbar */}
-            <Navbar />
-            {/* End of Topbar */}
-
-            {/* Begin Page Content */}
-            <div class="container-fluid">
-              {/* Tempatkan konten Anda di sini */}
-              <h1>Welcome to the Admin Dashboard!</h1>
+    <Router>
+      <div id="page-top">
+        <div id="wrapper">
+          <Sidebar />
+          <div id="content-wrapper" className="d-flex flex-column">
+            <div id="content">
+              <Navbar />
+              <div className="container-fluid">
+                <AppRoutes />
+              </div>
             </div>
-            {/* /.container-fluid */}
+            <Footer />
           </div>
-          {/* End of Main Content */}
-
-          {/* Footer */}
-          <Footer />
-          {/* End of Footer */}
         </div>
-        {/* End of Content Wrapper */}
+        <a className="scroll-to-top rounded" href="#page-top">
+          <i className="fas fa-angle-up"></i>
+        </a>
       </div>
-      {/* End of Page Wrapper */}
-
-      {/* Scroll to Top Button */}
-      <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-      </a>
-    </div>
+    </Router>
   );
 }
 
