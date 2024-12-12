@@ -78,6 +78,13 @@ function Sidebar() {
           </a>
         </li>
 
+        <li class="nav-item">
+          <Link to="/admin/ulasan" className="nav-link">
+            <i class="fa-solid fa-file-pen"></i>
+            <span>Ulasan</span>
+          </Link>
+        </li>
+
         {/* Divider */}
         <hr class="sidebar-divider d-none d-md-block" />
       </ul>
