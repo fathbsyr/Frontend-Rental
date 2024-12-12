@@ -1,29 +1,16 @@
-import Footer from './components/admin/Footer';
-import Navbar from './components/admin/Navbar';
-import Sidebar from './components/admin/Sidebar';
-import { BrowserRouter as Router } from "react-router-dom";
-import AppRoutes from './Routes/Routes';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AdminLayouts from './Layouts/AdminLayouts';
+import AdminRoutes from './Routes/AdminRoutes';
+import './assets/admin/css/sb-admin-2.min.css';
+import './assets/admin/vendor/datatables/dataTables.bootstrap4.min.css';
 
 function App() {
   return (
     <Router>
-      <div id="page-top">
-        <div id="wrapper">
-          <Sidebar />
-          <div id="content-wrapper" className="d-flex flex-column">
-            <div id="content">
-              <Navbar />
-              <div className="container-fluid">
-                <AppRoutes />
-              </div>
-            </div>
-            <Footer />
-          </div>
-        </div>
-        <a className="scroll-to-top rounded" href="#page-top">
-          <i className="fas fa-angle-up"></i>
-        </a>
-      </div>
+      <Routes>
+        {/* Admin Dashboard */}
+        <Route path="/*" element={<AdminLayouts><AdminRoutes /></AdminLayouts>} />
+      </Routes>
     </Router>
   );
 }

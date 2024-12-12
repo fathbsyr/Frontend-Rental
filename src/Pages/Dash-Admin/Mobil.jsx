@@ -59,7 +59,7 @@ const Mobil = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
     );
   };
   
