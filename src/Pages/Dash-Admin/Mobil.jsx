@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios"; // Import Axios
 import $ from "jquery";
 import "datatables.net";
 import "datatables.net-dt/css/dataTables.dataTables.css";
@@ -9,27 +10,23 @@ const Mobil = () => {
   const [loading, setLoading] = useState(true); // State untuk loading
   const [error, setError] = useState(null); // State untuk error
 
-  // Fetch data dari API
+  // Fetch data dari API dengan Axios
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/mobil");
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const result = await response.json();
-        console.log("Data fetched:", result); // Log untuk memeriksa data
-        if (Array.isArray(result)) {
-          setDataMobil(result); // Set data jika array
-        } else if (result.data && Array.isArray(result.data)) {
-          setDataMobil(result.data); // Jika data ada dalam key `data`
+        const response = await axios.get("http://localhost:8000/api/mobil");
+        console.log("Data fetched:", response.data); // Log respons untuk debugging
+        if (Array.isArray(response.data)) {
+          setDataMobil(response.data); // Jika data adalah array langsung
+        } else if (response.data.data && Array.isArray(response.data.data)) {
+          setDataMobil(response.data.data); // Jika data ada di key data
         } else {
           throw new Error("Data format is not supported");
         }
         setError(null); // Reset error jika berhasil
       } catch (err) {
         console.error("Error fetching data:", err);
-        setError(err.message); // Simpan pesan error
+        setError(err.message); // Set error jika ada masalah
       } finally {
         setLoading(false); // Matikan loading
       }
@@ -42,7 +39,7 @@ const Mobil = () => {
   useEffect(() => {
     if (dataMobil.length > 0) {
       const table = $(tableRef.current).DataTable({
-        data: dataMobil, // Data langsung ke DataTables
+        data: dataMobil, // Data untuk DataTables
         columns: [
           { title: "Brand", data: "brand" },
           { title: "Nama", data: "nama" },
