@@ -2,77 +2,91 @@ import React, { useState, useEffect, useRef } from "react";
 import $ from "jquery";
 import "datatables.net";
 import "datatables.net-dt/css/dataTables.dataTables.css";
+
 const Mobil = () => {
-  const tableRef = useRef(null);
+  const tableRef = useRef(null); // Referensi ke tabel
+  const [dataMobil, setDataMobil] = useState([]); // State untuk data mobil
+  const [loading, setLoading] = useState(true); // State untuk loading
+  const [error, setError] = useState(null); // State untuk error
+
+  // Fetch data dari API
   useEffect(() => {
-    const table = $(tableRef.current).DataTable();
-    return () => {
-      table.destroy();
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/api/mobil");
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log("Data fetched:", result); // Log untuk memeriksa data
+        if (Array.isArray(result)) {
+          setDataMobil(result); // Set data jika array
+        } else if (result.data && Array.isArray(result.data)) {
+          setDataMobil(result.data); // Jika data ada dalam key `data`
+        } else {
+          throw new Error("Data format is not supported");
+        }
+        setError(null); // Reset error jika berhasil
+      } catch (err) {
+        console.error("Error fetching data:", err);
+        setError(err.message); // Simpan pesan error
+      } finally {
+        setLoading(false); // Matikan loading
+      }
     };
+
+    fetchData();
   }, []);
 
+  // Inisialisasi DataTables
+  useEffect(() => {
+    if (dataMobil.length > 0) {
+      const table = $(tableRef.current).DataTable({
+        data: dataMobil, // Data langsung ke DataTables
+        columns: [
+          { title: "Brand", data: "brand" },
+          { title: "Nama", data: "nama" },
+          { title: "Harga", data: "harga" },
+          { title: "Ketersediaan", data: "ketersediaan" },
+          { title: "Deskripsi", data: "deskripsi" },
+        ],
+        destroy: true, // Hapus tabel lama sebelum re-render
+      });
+      return () => {
+        table.destroy(); // Hapus DataTables saat unmount
+      };
+    }
+  }, [dataMobil]);
+
+  // Render
   return (
     <div>
       <h1 className="h3 mb-2 text-gray-800">Table Data Mobil</h1>
       <p className="mb-4">Tempat Pengelolaan Data Mobil</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-          <h6 className="m-0 font-weight-bold text-primary">
-            DataTables Example
-          </h6>
+          <h6 className="m-0 font-weight-bold text-primary">DataTables Example</h6>
         </div>
         <div className="card-body">
-          <div className="table-responsive">
-            <table
-              id="dataTable"
-              width="100%"
-              cellSpacing="0"
-              ref={tableRef}
-              className="table table-bordered dataTable"
-            >
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
-                </tr>
-              </tfoot>
-              <tbody>
-                <tr>
-                  <td>Tiger Nixon</td>
-                  <td>System Architect</td>
-                  <td>Edinburgh</td>
-                  <td>61</td>
-                  <td>2011/04/25</td>
-                  <td>$320,800</td>
-                </tr>
-                <tr>
-                  <td>Garrett Winters</td>
-                  <td>Accountant</td>
-                  <td>Tokyo</td>
-                  <td>63</td>
-                  <td>2011/07/25</td>
-                  <td>$170,750</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          {loading ? (
+            <p>Loading data...</p>
+          ) : error ? (
+            <p style={{ color: "red" }}>Error: {error}</p>
+          ) : (
+            <div className="table-responsive">
+              <table
+                id="dataTable"
+                width="100%"
+                cellSpacing="0"
+                ref={tableRef}
+                className="table table-bordered dataTable"
+              ></table>
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 };
+
 export default Mobil;
