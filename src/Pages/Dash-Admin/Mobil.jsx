@@ -1,21 +1,34 @@
+import React, { useState, useEffect, useRef } from "react";
+import $ from "jquery";
+import "datatables.net";
+import "datatables.net-dt/css/dataTables.dataTables.css";
 const Mobil = () => {
-    return (
-      <div>
-      <h1 class="h3 mb-2 text-gray-800">Table Data Mobil</h1>
-      <p class="mb-4">
-        Tempat Pengelolaan Data Mobil
-      </p>
-      <div class="card shadow mb-4">
-        <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+  const tableRef = useRef(null);
+  useEffect(() => {
+    const table = $(tableRef.current).DataTable();
+    return () => {
+      table.destroy();
+    };
+  }, []);
+
+  return (
+    <div>
+      <h1 className="h3 mb-2 text-gray-800">Table Data Mobil</h1>
+      <p className="mb-4">Tempat Pengelolaan Data Mobil</p>
+      <div className="card shadow mb-4">
+        <div className="card-header py-3">
+          <h6 className="m-0 font-weight-bold text-primary">
+            DataTables Example
+          </h6>
         </div>
-        <div class="card-body">
-          <div class="table-responsive">
+        <div className="card-body">
+          <div className="table-responsive">
             <table
-              class="table table-bordered"
               id="dataTable"
               width="100%"
-              cellspacing="0"
+              cellSpacing="0"
+              ref={tableRef}
+              className="table table-bordered dataTable"
             >
               <thead>
                 <tr>
@@ -59,9 +72,7 @@ const Mobil = () => {
           </div>
         </div>
       </div>
-      </div>
-    );
-  };
-  
-  export default Mobil;
-  
+    </div>
+  );
+};
+export default Mobil;
