@@ -1,3 +1,5 @@
+import '../assets/admin/css/sb-admin-2.min.css';
+import '../assets/admin/vendor/datatables/dataTables.bootstrap4.min.css';
 import Sidebar from "../components/admin/Sidebar";
 import Navbar from "../components/admin/Navbar";
 import Footer from "../components/admin/Footer";

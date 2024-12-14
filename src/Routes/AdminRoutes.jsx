@@ -9,13 +9,13 @@ import Ulasan from "../Pages/Dash-Admin/Ulasan";
 const AdminRoutes = () => {
   return (
     <Routes>
-      <Route path="/admin" element={<Dashboard />} />
-      <Route path="/admin/mobil" element={<Mobil />} />
-      <Route path="/admin/reservasi" element={<Reservasi />} />
-      <Route path="/admin/pelanggan" element={<Pelanggan />} />
-      <Route path="/admin/promosi" element={<Promosi />} />
-      <Route path="/admin/ulasan" element={<Ulasan />} />
-      <Route path="*" element={<Navigate to="/admin" />} />
+      <Route path="/" element={<Dashboard />} />
+      <Route path="mobil" element={<Mobil />} />
+      <Route path="reservasi" element={<Reservasi />} />
+      <Route path="pelanggan" element={<Pelanggan />} />
+      <Route path="promosi" element={<Promosi />} />
+      <Route path="ulasan" element={<Ulasan />} />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 };

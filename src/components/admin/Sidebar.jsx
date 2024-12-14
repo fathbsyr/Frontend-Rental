@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 function Sidebar() {
     return (
       <ul
-        className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
-        id="accordionSidebar"
+        className="navbar-nav sidebar sidebar-dark accordion"
+        id="accordionSidebar" style={{ backgroundColor: "#2b2e4a" }}
       >
         {/* Sidebar - Brand */}
         <a
