@@ -15,7 +15,7 @@ const AdminRoutes = () => {
       <Route path="pelanggan" element={<Pelanggan />} />
       <Route path="promosi" element={<Promosi />} />
       <Route path="ulasan" element={<Ulasan />} />
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route path="*" element={<Navigate to="/admin/" />} />
     </Routes>
   );
 };
