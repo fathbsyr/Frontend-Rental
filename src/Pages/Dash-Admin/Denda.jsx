@@ -3,7 +3,7 @@ import $ from "jquery";
 import "datatables.net";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 
-function Pelanggan() {
+const Denda = () => {
   const tableRef = useRef(null);
   useEffect(() => {
     const table = $(tableRef.current).DataTable();
@@ -11,14 +11,14 @@ function Pelanggan() {
       table.destroy();
     };
   }, []);
-  
+
   return (
     <div>
-      <h1 className="h3 mb-2 text-gray-800">Table Data Pelanggan</h1>
-      <p className="mb-4">Tempat Pengelolaan Data Pelanggan</p>
+      <h1 className="h3 mb-2 text-gray-800">Table Data Denda</h1>
+      <p className="mb-4">Tempat Pengelolaan Data Denda</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-          <h6 className="m-0 font-weight-bold text-primary">Data Pelanggan</h6>
+          <h6 className="m-0 font-weight-bold text-primary">Data Denda</h6>
         </div>
         <div className="card-body">
           <div className="table-responsive">
@@ -73,6 +73,5 @@ function Pelanggan() {
       </div>
     </div>
   );
-}
-
-export default Pelanggan;
+};
+export default Denda;

@@ -55,10 +55,10 @@ function Sidebar() {
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="tables.html">
+          <Link to="/admin/pembayaran" className="nav-link">
             <i className="fa-solid fa-money-bill"></i>
             <span>Pembayaran</span>
-          </a>
+          </Link>
         </li>
 
         {/* Nav Item - promosi */}
@@ -71,10 +71,10 @@ function Sidebar() {
 
         {/* Nav Item - pelanggan */}
         <li class="nav-item">
-          <a class="nav-link" href="tables.html">
+          <Link className="nav-link" to="/admin/denda">
             <i class="fa-solid fa-triangle-exclamation"></i>
             <span>Denda</span>
-          </a>
+          </Link>
         </li>
 
         <li class="nav-item">
