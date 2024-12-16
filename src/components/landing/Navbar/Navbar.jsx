@@ -26,13 +26,13 @@ function Navbar() {
               id="navbarCollapse"
             >
               <div className="navbar-nav ml-auto py-0">
-                <a href="index.html" className="nav-item nav-link">
+                <a href="/" className="nav-item nav-link">
                   Home
                 </a>
                 <a href="about.html" className="nav-item nav-link">
                   About
                 </a>
-                <a href="service.html" className="nav-item nav-link">
+                <a href="/cars" className="nav-item nav-link">
                   Cars
                 </a>
                 <a href="contact.html" className="nav-item nav-link">

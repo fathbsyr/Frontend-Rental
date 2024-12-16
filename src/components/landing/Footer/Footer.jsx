@@ -71,32 +71,32 @@ function Footer() {
             <div className="row mx-n1">
               <div className="col-4 px-1 mb-2">
                 <a href>
-                  <img className="w-100" src="img/gallery-1.jpg" alt />
+                  <img className="w-100" src="../src/assets/landing/img/gallery-1.jpg" alt />
                 </a>
               </div>
               <div className="col-4 px-1 mb-2">
                 <a href>
-                  <img className="w-100" src="img/gallery-2.jpg" alt />
+                  <img className="w-100" src="../src/assets/landing/img/gallery-2.jpg" alt />
                 </a>
               </div>
               <div className="col-4 px-1 mb-2">
                 <a href>
-                  <img className="w-100" src="img/gallery-3.jpg" alt />
+                  <img className="w-100" src="../src/assets/landing/img/gallery-3.jpg" alt />
                 </a>
               </div>
               <div className="col-4 px-1 mb-2">
                 <a href>
-                  <img className="w-100" src="img/gallery-4.jpg" alt />
+                  <img className="w-100" src="../src/assets/landing/img/gallery-4.jpg" alt />
                 </a>
               </div>
               <div className="col-4 px-1 mb-2">
                 <a href>
-                  <img className="w-100" src="img/gallery-5.jpg" alt />
+                  <img className="w-100" src="../src/assets/landing/img/gallery-5.jpg" alt />
                 </a>
               </div>
               <div className="col-4 px-1 mb-2">
                 <a href>
-                  <img className="w-100" src="img/gallery-6.jpg" alt />
+                  <img className="w-100" src="../src/assets/landing/img/gallery-6.jpg" alt />
                 </a>
               </div>
             </div>
