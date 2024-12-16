@@ -1,12 +1,12 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Mobil from "../Pages/Dash-Admin/Mobil";
-import Reservasi from "../Pages/Dash-Admin/Reservasi";
-import Pelanggan from "../Pages/Dash-Admin/Pelanggan";
-import Promosi from "../Pages/Dash-Admin/Promosi";
 import Dashboard from "../Pages/Dash-Admin/Dashboard";
-import Ulasan from "../Pages/Dash-Admin/Ulasan";
-import Denda from "../Pages/Dash-Admin/Denda";
-import Pembayaran from "../Pages/Dash-Admin/Pembayaran";
+import Mobil from "../Pages/Dash-Admin/mobil/Mobil";
+import Reservasi from "../Pages/Dash-Admin/reservasi/Reservasi";
+import Pelanggan from "../Pages/Dash-Admin/pelanggan/Pelanggan";
+import Promosi from "../Pages/Dash-Admin/promosi/Promosi";
+import Ulasan from "../Pages/Dash-Admin/ulasan/Ulasan";
+import Denda from "../Pages/Dash-Admin/denda/Denda";
+import Pembayaran from "../Pages/Dash-Admin/pembayaran/Pembayaran";
 
 const AdminRoutes = () => {
   return (

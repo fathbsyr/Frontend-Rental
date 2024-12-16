@@ -1,5 +1,5 @@
-import Mobil from "./Mobil";
-import Ulasan from "./Ulasan";
+import Mobil from "./mobil/Mobil";
+import Ulasan from "./ulasan/Ulasan";
 const Dashboard = () => {
   return (
     <div>
