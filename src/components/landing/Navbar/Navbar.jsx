@@ -35,7 +35,7 @@ function Navbar() {
                 <a href="/cars" className="nav-item nav-link">
                   Cars
                 </a>
-                <a href="contact.html" className="nav-item nav-link">
+                <a href="/contact" className="nav-item nav-link">
                   Contact
                 </a>
                 <a href="contact.html" className="nav-item nav-link">
