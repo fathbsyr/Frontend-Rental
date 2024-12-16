@@ -29,7 +29,7 @@ function Navbar() {
                 <a href="/" className="nav-item nav-link">
                   Home
                 </a>
-                <a href="about.html" className="nav-item nav-link">
+                <a href="/about" className="nav-item nav-link">
                   About
                 </a>
                 <a href="/cars" className="nav-item nav-link">

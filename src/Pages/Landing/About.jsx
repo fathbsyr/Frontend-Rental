@@ -9,7 +9,7 @@ function About() {
           </h1>
           <div className="row justify-content-center">
             <div className="col-lg-10 text-center">
-              <img className="w-75 mb-4" src="img/about.png" alt />
+              <img className="w-75 mb-4" src="https://f1rstmotors.com/_next/image?url=https%3A%2F%2Ff1rst-motors.s3.me-central-1.amazonaws.com%2Fblog%2F1709638335043-blob&w=3840&q=100" alt />
               <p>
                 Justo et eos et ut takimata sed sadipscing dolore lorem, et
                 elitr labore labore voluptua no rebum sed, stet voluptua amet
