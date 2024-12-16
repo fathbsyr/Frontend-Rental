@@ -1,7 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../Pages/Landing/Home";
 import Cars from "../Pages/Landing/Cars"
-
 function LandingRoutes() {
   return (
     <Routes>
