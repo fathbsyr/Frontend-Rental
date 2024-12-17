@@ -1,6 +1,21 @@
 function About() {
   return (
     <div>
+      {/* Page Header Start */}
+      <div className="container-fluid page-header">
+        <h1 className="display-3 text-uppercase text-white mb-3">About</h1>
+        <div className="d-inline-flex text-white">
+          <h6 className="text-uppercase m-0">
+            <a className="text-white" href>
+              Home
+            </a>
+          </h6>
+          <h6 className="text-body m-0 px-3">/</h6>
+          <h6 className="text-uppercase text-body m-0">About</h6>
+        </div>
+      </div>
+      {/* Page Header Start */}
+
       {/* About Start */}
       <div className="container-fluid py-5">
         <div className="container pt-5 pb-3">
@@ -9,7 +24,11 @@ function About() {
           </h1>
           <div className="row justify-content-center">
             <div className="col-lg-10 text-center">
-              <img className="w-75 mb-4" src="https://f1rstmotors.com/_next/image?url=https%3A%2F%2Ff1rst-motors.s3.me-central-1.amazonaws.com%2Fblog%2F1709638335043-blob&w=3840&q=100" alt />
+              <img
+                className="w-75 mb-4"
+                src="https://f1rstmotors.com/_next/image?url=https%3A%2F%2Ff1rst-motors.s3.me-central-1.amazonaws.com%2Fblog%2F1709638335043-blob&w=3840&q=100"
+                alt
+              />
               <p>
                 Justo et eos et ut takimata sed sadipscing dolore lorem, et
                 elitr labore labore voluptua no rebum sed, stet voluptua amet
