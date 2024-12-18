@@ -38,7 +38,7 @@ function Navbar() {
                 <a href="/contact" className="nav-item nav-link">
                   Contact
                 </a>
-                <a href="contact.html" className="nav-item nav-link">
+                <a href="/login" className="nav-item nav-link">
                   Login
                 </a>
               </div>

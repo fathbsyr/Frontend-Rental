@@ -13,20 +13,30 @@ const Pelanggan = () => {
   useEffect(() => {
     const fetchPelanggan = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/pelanggan");
+        const token = localStorage.getItem("token"); // Ambil token
+        const response = await axios.get("http://localhost:8000/api/pelanggan", {
+          headers: {
+            Authorization: `Bearer ${token}`, // Kirim token
+          },
+        });
         if (response.data.success) {
           setPelanggan(response.data.data);
         } else {
           setError("Gagal Menampilkan Data Pelanggan");
         }
       } catch (err) {
-        setError(err.message || "An error occurred");
+        if (err.response?.status === 401) {
+          setError("Sesi telah berakhir. Silakan login kembali.");
+          window.location.href = "/login"; // Redirect ke login
+        } else {
+          setError(err.response?.data?.message || "Terjadi kesalahan");
+        }
       } finally {
         setLoading(false);
       }
     };
     fetchPelanggan();
-  }, []); // Empty dependency array to run only once on component mount
+  }, []);
 
   useEffect(() => {
     if (!loading && !error && pelanggan.length > 0) {

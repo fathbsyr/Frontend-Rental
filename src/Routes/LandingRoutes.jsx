@@ -3,6 +3,7 @@ import Home from "../Pages/Landing/Home";
 import Cars from "../Pages/Landing/Cars"
 import About from "../Pages/Landing/About"
 import Contact from "../Pages/Landing/Contact"
+import Login from "../Pages/Login"
 function LandingRoutes() {
   return (
     <Routes>
@@ -11,6 +12,7 @@ function LandingRoutes() {
       <Route path="/about" element={<About />} />
       <Route path="*" element={<Navigate to="/" />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/login" element={<Login />} />
     </Routes>
   );
 }
