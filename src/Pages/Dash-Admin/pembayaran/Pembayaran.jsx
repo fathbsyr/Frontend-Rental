@@ -1,17 +1,54 @@
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import $ from "jquery";
 import "datatables.net";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 
 const Pembayaran = () => {
-
   const tableRef = useRef(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [pembayaran, setPembayaran] = useState([]);
+
   useEffect(() => {
-    const table = $(tableRef.current).DataTable();
-    return () => {
-      table.destroy();
+    const fetchPembayaran = async () => {
+      try {
+        const token = localStorage.getItem("token"); // Ambil token
+        const response = await axios.get(
+          "http://localhost:8000/api/pembayaran",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Kirim token
+            },
+          }
+        );
+        if (response.data.success) {
+          setPembayaran(response.data.data);
+        } else {
+          setError("Gagal Menampilkan Data Pembayaran");
+        }
+      } catch (err) {
+        if (err.response?.status === 401) {
+          setError("Sesi telah berakhir. Silakan login kembali.");
+          window.location.href = "/"; // Redirect ke login
+        } else {
+          setError(err.response?.data?.message || "Terjadi kesalahan");
+        }
+      } finally {
+        setLoading(false);
+      }
     };
+    fetchPembayaran();
   }, []);
+
+  useEffect(() => {
+    if (!loading && !error && pembayaran.length > 0) {
+      const table = $(tableRef.current).DataTable();
+      return () => {
+        table.destroy(false);
+      };
+    }
+  }, [loading, error, pembayaran]);
 
   return (
     <div>
@@ -22,54 +59,52 @@ const Pembayaran = () => {
           <h6 className="m-0 font-weight-bold text-primary">Data Pembayaran</h6>
         </div>
         <div className="card-body">
-          <div className="table-responsive">
-            <table
-              id="dataTable"
-              width="100%"
-              cellSpacing="0"
-              ref={tableRef}
-              className="table table-bordered dataTable"
-            >
+          {loading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p>Error Occurred: {error}</p>
+          ) : (
+            <table ref={tableRef} className="display" style={{ width: "100%" }}>
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
+                  <th>No</th>
+                  <th>Metode</th>
+                  <th>Tanggal Bayar</th>
+                  <th>Status</th>
+                  <th>Pelanggan</th>
+                  <th>Diskon</th>
+                  <th>Denda</th>
+                  <th>Total Bayar</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
+                  <th>No</th>
+                  <th>Metode</th>
+                  <th>Tanggal Bayar</th>
+                  <th>Status</th>
+                  <th>Pelanggan</th>
+                  <th>Diskon</th>
+                  <th>Denda</th>
+                  <th>Total Bayar</th>
                 </tr>
               </tfoot>
               <tbody>
-                <tr>
-                  <td>Tiger Nixon</td>
-                  <td>System Architect</td>
-                  <td>Edinburgh</td>
-                  <td>61</td>
-                  <td>2011/04/25</td>
-                  <td>$320,800</td>
-                </tr>
-                <tr>
-                  <td>Garrett Winters</td>
-                  <td>Accountant</td>
-                  <td>Tokyo</td>
-                  <td>63</td>
-                  <td>2011/07/25</td>
-                  <td>$170,750</td>
-                </tr>
+                {pembayaran.map((item, index) => (
+                  <tr key={item.id}>
+                    <td>{index + 1}</td>
+                    <td>{item.metode}</td>
+                    <td>{item.tanggal_bayar}</td>
+                    <td>{item.status}</td>
+                    <td>{item.pelanggan}</td>
+                    <td>{item.diskon}</td>
+                    <td>{item.denda}</td>
+                    <td>{item.total_bayar}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
-          </div>
+          )}
         </div>
       </div>
     </div>
