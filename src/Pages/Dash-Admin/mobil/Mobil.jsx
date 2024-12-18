@@ -43,9 +43,7 @@ const Mobil = () => {
       <p className="mb-4">Tempat Pengelolaan Data Mobil</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-          <h6 className="m-0 font-weight-bold text-primary">
-            Data Mobil
-          </h6>
+        <a href="/admin/mobil/add" className="btn btn-primary btn-sm" >Tambah Data Mobil</a>
         </div>
         <div className="card-body">
           {loading ? (

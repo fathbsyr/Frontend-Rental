@@ -25,6 +25,7 @@ function Login() {
       alert("Login berhasil!");
       localStorage.setItem("token", token);
       localStorage.setItem("name", adminName);
+      localStorage.setItem("role", "admin");
       window.location.href = "/admin/dashboard";
 
       // const response = await axios.post("http://localhost:8000/api/login", {

@@ -27,7 +27,7 @@ const Pelanggan = () => {
       } catch (err) {
         if (err.response?.status === 401) {
           setError("Sesi telah berakhir. Silakan login kembali.");
-          window.location.href = "/login"; // Redirect ke login
+          window.location.href = "/"; // Redirect ke login
         } else {
           setError(err.response?.data?.message || "Terjadi kesalahan");
         }
