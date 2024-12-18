@@ -51,7 +51,10 @@ const Pelanggan = () => {
     <div>
       <h1 className="h3 mb-2 text-gray-800">Table Data Pelanggan</h1>
       <p className="mb-4">Tempat Pengelolaan Data Pelanggan</p>
-      <div className="card shadow mb-4">
+      <div className="card shadow mb-4"> 
+        <div className="card-header py-3">
+        <a href="/admin/pelanggan/add" className="btn btn-primary btn-sm" >Tambah Data Pelanggan</a>
+        </div>
         <div className="card-header py-3">
           <h6 className="m-0 font-weight-bold text-primary">
             Data Pelanggan
