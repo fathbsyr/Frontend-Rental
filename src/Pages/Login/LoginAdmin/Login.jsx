@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function Login() {
+function LoginAdmin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+/*************  ✨ Codeium Command ⭐  *************/
+  /**
+   * Handle login form submission
+   * @param {React.FormEvent} e - The form event
+   */
+/******  6a686e8f-d454-4c3e-a3e3-5f3a47d455f6  *******/
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
@@ -28,16 +34,6 @@ function Login() {
       localStorage.setItem("role", "admin");
       window.location.href = "/admin/dashboard";
 
-      // const response = await axios.post("http://localhost:8000/api/login", {
-      //   email,
-      //   password,
-      // });
-      // const { token, name: pelangganName } = response.data;
-      // alert("Login berhasil!");
-      // localStorage.setItem("token", token);
-      // localStorage.setItem("name", pelangganName);
-      // window.location.href = "/dashboard";
-      
     } catch (err) {
       setError(
         err.response?.data?.message ||
@@ -56,7 +52,7 @@ function Login() {
           <div className="col-lg-5">
             <div className="card shadow-lg border-10 rounded-7 mt-5">
               <div className="card-header">
-                <h3 className="text-center font-weight-light my-4">Login</h3>
+                <h3 className="text-center font-weight-light my-4">Login Administrator</h3>
               </div>
               <div className="card-body">
                 {error && <div className="alert alert-danger">{error}</div>}
@@ -116,4 +112,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginAdmin;

@@ -26,7 +26,7 @@ function App() {
         <Route
           path="/admin/*"
           element={
-            <ProtectedRoutes allowedRoles={["admin"]}>
+            <ProtectedRoutes requiredRole="admin">
               <AdminLayouts>
                 <AdminRoutes />
               </AdminLayouts>
@@ -38,7 +38,7 @@ function App() {
         <Route
           path="/dashboard/*"
           element={
-            <ProtectedRoutes allowedRoles={["pelanggan"]}>
+            <ProtectedRoutes requiredRole="pelanggan">
               <PelangganLayouts>
                 <PelangganRoutes />
               </PelangganLayouts>

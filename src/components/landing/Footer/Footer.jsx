@@ -122,7 +122,7 @@ function Footer() {
                 </div>
               </div>
             </div>
-            <i>Lorem sit sed elitr sed kasd et</i>
+            <a href="/login-admin">Login Administrator</a>
           </div>
         </div>
       </div>
