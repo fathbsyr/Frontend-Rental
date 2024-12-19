@@ -43,7 +43,7 @@ const Ulasan = () => {
       <p className="mb-4">Tempat Pengelolaan Data Ulasan</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-          <a href="/admin/ulasan/add" className="btn btn-primary">Tambah Data Ulasan</a>
+          <a href="/admin/ulasan/add" className="btn btn-primary btn-sm">Tambah Data Ulasan</a>
         </div>
         <div className="card-body">
           {loading ? (

@@ -1,35 +1,29 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2"; // Import SweetAlert2
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 
-function AddUlasan() {
+function AddPromosi() {
   const [formData, setFormData] = useState({
-    komentar: "",
-    pelanggan_id: "",
+    diskon: 0,
+    mobil_id: "",
   });
-  const [pelanggan, setPelanggan] = useState([]);
   const [error, setError] = useState(null);
+  const [mobil, setMobil] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchPelanggan = async () => {
+    const fetchMobil = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const pelangganResponse = await axios.get(
-          "http://localhost:8000/api/pelanggan",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+        const mobilResponse = await axios.get(
+          "http://localhost:8000/api/mobil"
         );
-        setPelanggan(pelangganResponse.data.data);
+        setMobil(mobilResponse.data.data);
       } catch (error) {
         setError(error.message);
       }
     };
-    fetchPelanggan();
+    fetchMobil();
   }, []);
 
   const handleChange = (e) => {
@@ -43,7 +37,7 @@ function AddUlasan() {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:8000/api/ulasan/create",
+        "http://localhost:8000/api/promosi/create",
         formData,
         {
           headers: {
@@ -56,16 +50,16 @@ function AddUlasan() {
         // SweetAlert2 untuk pesan sukses
         Swal.fire({
           title: "Berhasil!",
-          text: "Data berhasil ditambahkan.",
+          text: "Data promosi berhasil ditambahkan.",
           icon: "success",
           confirmButtonText: "OK",
         }).then(() => {
-          navigate("/admin/ulasan");
+          navigate("/admin/promosi");
         });
       } else {
         Swal.fire({
           title: "Gagal!",
-          text: "Data gagal ditambahkan.",
+          text: "Data promosi gagal ditambahkan.",
           icon: "error",
           confirmButtonText: "Coba Lagi",
         });
@@ -84,37 +78,38 @@ function AddUlasan() {
 
   return (
     <div className="m-5 p-3">
-      <h2>Tambah Ulasan</h2>
+      <h2>Tambah Promosi</h2>
       {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="text">Komentar</label>
+          <label htmlFor="text">Diskon</label>
           <div className="input-group">
             <div className="input-group-prepend"></div>
             <input
               id="text"
-              name="komentar"
-              type="text"
-              value={formData.komentar}
+              name="diskon"
+              type="number"
+              min="0"
+              value={formData.diskon}
               onChange={handleChange}
               className="form-control"
             />
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="select">Pelanggan</label>
+          <label htmlFor="select">Mobil</label>
           <div>
             <select
               id="select"
-              name="pelanggan_id"
+              name="mobil_id"
               className="custom-select"
-              value={formData.pelanggan_id}
+              value={formData.mobil_id}
               onChange={handleChange}
             >
-              <option value="">Pilih Nama Anda</option>
-              {pelanggan.map((pel) => (
-                <option key={pel.id} value={pel.id}>
-                  {pel.nama}
+              <option value="">Pilih Mobil</option>
+              {mobil.map((mob) => (
+                <option key={mob.id} value={mob.id}>
+                  {mob.nama}
                 </option>
               ))}
             </select>
@@ -134,4 +129,4 @@ function AddUlasan() {
     </div>
   );
 }
-export default AddUlasan;
+export default AddPromosi;
