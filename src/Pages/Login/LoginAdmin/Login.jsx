@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 
@@ -7,6 +8,7 @@ function LoginAdmin() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -18,34 +20,41 @@ function LoginAdmin() {
 
     setIsLoading(true);
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/admin/login",
-        {
-          email,
-          password,
-        }
-      );
-      const { token, name: adminName } = response.data;
-
-      // Menggunakan SweetAlert2 untuk menampilkan pesan sukses
-      Swal.fire({
-        title: "Login Berhasil!",
-        text: `Selamat datang, ${adminName}!`,
-        icon: "success",
-        confirmButtonText: "OK",
-      }).then(() => {
-        // Aksi setelah dialog ditutup
-        localStorage.setItem("token", token);
-        localStorage.setItem("name", adminName);
-        localStorage.setItem("role", "admin");
-        window.location.href = "/admin/dashboard";
+      const response = await axios.post("http://localhost:8000/api/admin/login", {
+        email,
+        password,
       });
+
+      if (response.status === 200 && response.data.status === "success") {
+        // SweetAlert2 untuk feedback sukses
+        Swal.fire({
+          title: "Login Berhasil!",
+          text: "Selamat datang di dashboard.",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then(() => {
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("name", response.data.name);
+          localStorage.setItem("role", response.data.role);
+          navigate("/admin/dashboard");
+        });
+      } else {
+        Swal.fire({
+          title: "Login Gagal!",
+          text: response.data.message || "Login gagal. Silakan coba lagi.",
+          icon: "error",
+          confirmButtonText: "Coba Lagi",
+        });
+      }
     } catch (err) {
-      setError(
-        err.response?.data?.message ||
-          err.message ||
-          "Terjadi kesalahan saat login. Silakan coba lagi."
-      );
+      Swal.fire({
+        title: "Terjadi Kesalahan!",
+        text:
+          err.response?.data?.message ||
+          "Tidak dapat terhubung ke server. Periksa koneksi internet Anda.",
+        icon: "error",
+        confirmButtonText: "Coba Lagi",
+      });
     } finally {
       setIsLoading(false);
     }
