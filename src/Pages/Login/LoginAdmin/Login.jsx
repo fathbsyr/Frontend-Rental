@@ -29,7 +29,7 @@ function LoginAdmin() {
         // SweetAlert2 untuk feedback sukses
         Swal.fire({
           title: "Login Berhasil!",
-          text: "Selamat datang di dashboard.",
+          text: "Selamat datang di dashboard " + response.data.name,
           icon: "success",
           confirmButtonText: "OK",
         }).then(() => {
