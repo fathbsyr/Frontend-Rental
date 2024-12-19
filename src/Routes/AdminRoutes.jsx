@@ -4,7 +4,9 @@ import Mobil from "../Pages/Dash-Admin/mobil/Mobil";
 import AddMobil from "../Pages/Dash-Admin/mobil/AddMobil";
 import Reservasi from "../Pages/Dash-Admin/reservasi/Reservasi";
 import Pelanggan from "../Pages/Dash-Admin/pelanggan/Pelanggan";
+import AddPelanggan from "../Pages/Dash-Admin/pelanggan/AddPelanggan";
 import Promosi from "../Pages/Dash-Admin/promosi/Promosi";
+import AddPromosi from "../Pages/Dash-Admin/promosi/AddPromosi";
 import Ulasan from "../Pages/Dash-Admin/ulasan/Ulasan";
 import AddUlasan from "../Pages/Dash-Admin/ulasan/AddUlasan";
 import Denda from "../Pages/Dash-Admin/denda/Denda";
@@ -22,6 +24,7 @@ const AdminRoutes = () => {
       <Route path="pelanggan" element={<Pelanggan />} />
       <Route path="pelanggan/add" element={<AddPelanggan />} />
       <Route path="promosi" element={<Promosi />} />
+      <Route path="promosi/add" element={<AddPromosi />} />
       <Route path="ulasan" element={<Ulasan />} />
       <Route path="ulasan/add" element={<AddUlasan />} />
       <Route path="denda" element={<Denda />} />

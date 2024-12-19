@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import axios from "axios";
 
 function LoginAdmin() {
@@ -6,13 +8,8 @@ function LoginAdmin() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
-/*************  ✨ Codeium Command ⭐  *************/
-  /**
-   * Handle login form submission
-   * @param {React.FormEvent} e - The form event
-   */
-/******  6a686e8f-d454-4c3e-a3e3-5f3a47d455f6  *******/
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
@@ -27,19 +24,37 @@ function LoginAdmin() {
         email,
         password,
       });
-      const { token, name: adminName } = response.data;
-      alert("Login berhasil!");
-      localStorage.setItem("token", token);
-      localStorage.setItem("name", adminName);
-      localStorage.setItem("role", "admin");
-      window.location.href = "/admin/dashboard";
 
+      if (response.status === 200 && response.data.status === "success") {
+        // SweetAlert2 untuk feedback sukses
+        Swal.fire({
+          title: "Login Berhasil!",
+          text: "Selamat datang di dashboard " + response.data.name,
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then(() => {
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("name", response.data.name);
+          localStorage.setItem("role", response.data.role);
+          navigate("/admin/dashboard");
+        });
+      } else {
+        Swal.fire({
+          title: "Login Gagal!",
+          text: response.data.message || "Login gagal. Silakan coba lagi.",
+          icon: "error",
+          confirmButtonText: "Coba Lagi",
+        });
+      }
     } catch (err) {
-      setError(
-        err.response?.data?.message ||
-        err.message ||
-        "Terjadi kesalahan saat login. Silakan coba lagi."
-      );
+      Swal.fire({
+        title: "Terjadi Kesalahan!",
+        text:
+          err.response?.data?.message ||
+          "Tidak dapat terhubung ke server. Periksa koneksi internet Anda.",
+        icon: "error",
+        confirmButtonText: "Coba Lagi",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -52,7 +67,9 @@ function LoginAdmin() {
           <div className="col-lg-5">
             <div className="card shadow-lg border-10 rounded-7 mt-5">
               <div className="card-header">
-                <h3 className="text-center font-weight-light my-4">Login Administrator</h3>
+                <h3 className="text-center font-weight-light my-4">
+                  Login Administrator
+                </h3>
               </div>
               <div className="card-body">
                 {error && <div className="alert alert-danger">{error}</div>}
@@ -93,7 +110,11 @@ function LoginAdmin() {
                     </label>
                   </div>
                   <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
-                    <button type="submit" className="btn btn-primary" disabled={isLoading}>
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      disabled={isLoading}
+                    >
                       {isLoading ? "Logging in..." : "Login"}
                     </button>
                   </div>

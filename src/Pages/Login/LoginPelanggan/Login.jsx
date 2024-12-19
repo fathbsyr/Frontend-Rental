@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function LoginPelanggan() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,23 +20,44 @@ function LoginPelanggan() {
 
     setIsLoading(true);
     try {
-      const response = await axios.post("http://localhost:8000/api/login", {
-        email,
-        password,
-      });
-      const { token, name: pelangganName } = response.data;
-      alert("Login berhasil!");
-      localStorage.setItem("token", token);
-      localStorage.setItem("name", pelangganName);
-      localStorage.setItem("role", "pelanggan");
-      window.location.href = "/dashboard";
-      
-    } catch (err) {
-      setError(
-        err.response?.data?.message ||
-        err.message ||
-        "Terjadi kesalahan saat login. Silakan coba lagi."
+      const response = await axios.post(
+        "http://localhost:8000/api/login",
+        {
+          email,
+          password,
+        }
       );
+
+      if (response.status === 200 && response.data.status === "success") {
+        // SweetAlert2 untuk feedback sukses
+        Swal.fire({
+          title: "Login Berhasil!",
+          text: "Selamat datang di dashboard " + response.data.name,
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then(() => {
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("name", response.data.name);
+          localStorage.setItem("role", response.data.role);
+          navigate("/dashboard");
+        });
+      } else {
+        Swal.fire({
+          title: "Login Gagal!",
+          text: response.data.message || "Login gagal. Silakan coba lagi.",
+          icon: "error",
+          confirmButtonText: "Coba Lagi",
+        });
+      }
+    } catch (err) {
+      Swal.fire({
+        title: "Terjadi Kesalahan!",
+        text:
+          err.response?.data?.message ||
+          "Tidak dapat terhubung ke server. Periksa koneksi internet Anda.",
+        icon: "error",
+        confirmButtonText: "Coba Lagi",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -87,7 +111,11 @@ function LoginPelanggan() {
                     </label>
                   </div>
                   <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
-                    <button type="submit" className="btn btn-primary" disabled={isLoading}>
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      disabled={isLoading}
+                    >
                       {isLoading ? "Logging in..." : "Login"}
                     </button>
                   </div>
