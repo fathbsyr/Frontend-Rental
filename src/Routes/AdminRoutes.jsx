@@ -12,7 +12,6 @@ import AddUlasan from "../Pages/Dash-Admin/ulasan/AddUlasan";
 import Denda from "../Pages/Dash-Admin/denda/Denda";
 import Pembayaran from "../Pages/Dash-Admin/pembayaran/Pembayaran";
 import AddPembayaran from "../Pages/Dash-Admin/pembayaran/AddPembayaran";
-import AddPelanggan from "../Pages/Dash-Admin/pelanggan/AddPelanggan";
 
 const AdminRoutes = () => {
   return (

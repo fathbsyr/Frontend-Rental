@@ -1,117 +1,265 @@
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2"; // Import SweetAlert2
 
 function AddPembayaran() {
-  const [mobil, setMobil] = useState({
+  const [formData, setFormData] = useState({
     metode: "",
     tanggal_bayar: "",
-    harga: "",
-    ketersediaan: "",
-    deskripsi: "",
+    status: "",
+    pelanggan_id: "",
+    reservasi_id: "",
+    promosi_id: "",
+    denda_id: "",
+    total_bayar: "",
   });
-
+  const [pelanggan, setPelanggan] = useState([]);
+  const [promosi, setPromosi] = useState([]);
+  const [denda, setDenda] = useState([]);
+  const [reservasi, setReservasi] = useState([]);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const ketersediaanOptions = [
-    { id: 1, value: "tersedia", label: "Tersedia" },
-    { id: 2, value: "kosong", label: "Tidak Tersedia" },
+  const metodeOptions = [
+    { id: 1, value: "transfer", label: "Transfer" },
+    { id: 2, value: "cash", label: "Cash" },
   ];
+  const statusOptions = [
+    { id: 1, value: "Belum Lunas", label: "Belum Lunas" },
+    { id: 2, value: "Lunas", label: "Lunas" },
+  ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const pelangganResponse = await axios.get(
+          "http://localhost:8000/api/pelanggan",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setPelanggan(pelangganResponse.data.data);
+
+        const reservasiResponse = await axios.get(
+          "http://localhost:8000/api/reservasi",
+          {
+            
+          }
+        );
+        setReservasi(reservasiResponse.data.data);
+
+        const promosiResponse = await axios.get(
+          "http://localhost:8000/api/promosi",
+          {
+            
+          }
+        );
+        setPromosi(promosiResponse.data.data);
+
+        const dendaResponse = await axios.get(
+          "http://localhost:8000/api/denda",
+          {
+            
+          }
+        );
+        setDenda(dendaResponse.data.data);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:8000/api/mobil/create",
-        mobil,
+        "http://localhost:8000/api/pembayaran/create",
+        formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         }
       );
       if (response.data.success) {
-        alert("Data Berhasil Dibuat");
-        navigate("/admin/mobil");
+        // SweetAlert2 untuk pesan sukses
+        Swal.fire({
+          title: "Berhasil!",
+          text: "Pembayaran berhasil ditambahkan.",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then(() => {
+          navigate("/admin/pembayaran");
+        });
       } else {
-        alert("Gagal Menambahkan Mobil");
+        Swal.fire({
+          title: "Gagal!",
+          text: "Pembayaran gagal ditambahkan.",
+          icon: "error",
+          confirmButtonText: "Coba Lagi",
+        });
       }
-    } catch (err) {
-      alert("Terjadi kesalahan, silahkan coba lagi");
-      console.error(err);
+    } catch (error) {
+      Swal.fire({
+        title: "Terjadi Kesalahan!",
+        text:
+          error.response?.data?.message ||
+          "Tidak dapat terhubung ke server. Periksa koneksi internet Anda.",
+        icon: "error",
+        confirmButtonText: "Coba Lagi",
+      });
     }
   };
 
   return (
-    <div className="m-3 p-3">
-      <h2>Tambah Mobil</h2>
+    <div className="m-5 p-3">
+      <h2>Tambah Pembayaran</h2>
+      {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label htmlFor="metode">Metode</label>
+        <select
+          id="metode"
+          name="metode"
+          className="custom-select"
+          value={formData.metode}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Pilih Metode Pembayaran</option>
+          {metodeOptions.map((option) => (
+            <option key={option.id} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </div>
         <div className="form-group">
-          <label htmlFor="brand">Brand</label>
+          <label htmlFor="tanggal_bayar">Tanggal Bayar</label>
           <input
-            id="brand"
-            name="brand"
-            type="text"
-            value={mobil.brand}
-            onChange={(e) => setMobil({ ...mobil, brand: e.target.value })}
+            id="tanggal_bayar"
+            name="tanggal_bayar"
+            type="date"
+            value={formData.tanggal_bayar}
+            onChange={handleChange}
             className="form-control"
+            required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="nama">Nama</label>
-          <input
-            id="nama"
-            name="nama"
-            type="text"
-            value={mobil.nama}
-            onChange={(e) => setMobil({ ...mobil, nama: e.target.value })}
-            className="form-control"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="harga">Harga</label>
-          <input
-            id="harga"
-            name="harga"
-            type="number"
-            min='10000000'
-            value={mobil.harga}
-            onChange={(e) => setMobil({ ...mobil, harga: e.target.value })}
-            className="form-control"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="ketersediaan">Ketersediaan</label>
+          <label htmlFor="status">Status</label>
           <select
-            id="ketersediaan"
-            name="ketersediaan"
+          id="status"
+          name="status"
+          className="custom-select"
+          value={formData.status}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Status Pembayaran</option>
+          {statusOptions.map((option) => (
+            <option key={option.id} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="pelanggan_id">Pelanggan</label>
+          <select
+            id="pelanggan_id"
+            name="pelanggan_id"
             className="custom-select"
-            value={mobil.ketersediaan}
-            onChange={(e) =>
-              setMobil({ ...mobil, ketersediaan: e.target.value })
-            }
+            value={formData.pelanggan_id}
+            onChange={handleChange}
+            required
           >
-            <option value="">Pilih Ketersediaan</option>
-            {ketersediaanOptions.map((option) => (
-              <option key={option.id} value={option.value}>
-                {option.label}
+            <option value="">Pilih Pelanggan</option>
+            {pelanggan.map((pel) => (
+              <option key={pel.id} value={pel.id}>
+                {pel.nama}
               </option>
             ))}
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="deskripsi">Deskripsi</label>
+          <label htmlFor="reservasi_id">Reservasi</label>
+          <select
+            id="reservasi_id"
+            name="reservasi_id"
+            className="custom-select"
+            value={formData.reservasi_id}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Pilih Reservasi</option>
+            {reservasi.map((res) => (
+              <option key={res.id} value={res.id}>
+                {res.pelanggan_id}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="promosi_id">Diskon</label>
+          <select
+            id="promosi_id"
+            name="promosi_id"
+            className="custom-select"
+            value={formData.promosi_id}
+            onChange={handleChange}
+          >
+            <option value="">Pilih Diskon</option>
+            {promosi.map((disk) => (
+              <option key={disk.id} value={disk.id}>
+                {disk.diskon}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="denda_id">Denda</label>
+          <select
+            id="denda_id"
+            name="denda_id"
+            className="custom-select"
+            value={formData.denda_id}
+            onChange={handleChange}
+          >
+            <option value="">Pilih Denda</option>
+            {denda.map((den) => (
+              <option key={den.id} value={den.id}>
+                {den.keterangan}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="total_bayar">Total Bayar</label>
           <input
-            id="deskripsi"
-            name="deskripsi"
-            type="text"
-            value={mobil.deskripsi}
-            onChange={(e) => setMobil({ ...mobil, deskripsi: e.target.value })}
+            id="total_bayar"
+            name="total_bayar"
+            type="number"
+            value={formData.total_bayar}
+            onChange={handleChange}
             className="form-control"
+            required
           />
         </div>
         <div className="form-group">
-          <button name="submit" type="submit" className="btn btn-primary">
+          <button name="submit" type="submit" onClick={handleSubmit} className="btn btn-primary">
             Submit
           </button>
         </div>
@@ -119,5 +267,4 @@ function AddPembayaran() {
     </div>
   );
 }
-
-export default AddMobil;
+export default AddPembayaran;
