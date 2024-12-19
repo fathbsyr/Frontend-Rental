@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 import axios from "axios";
 
 function LoginPelanggan() {
@@ -17,22 +18,33 @@ function LoginPelanggan() {
 
     setIsLoading(true);
     try {
-      const response = await axios.post("http://localhost:8000/api/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "http://localhost:8000/api/login",
+        {
+          email,
+          password,
+        }
+      );
       const { token, name: pelangganName } = response.data;
-      alert("Login berhasil!");
-      localStorage.setItem("token", token);
-      localStorage.setItem("name", pelangganName);
-      localStorage.setItem("role", "pelanggan");
-      window.location.href = "/dashboard";
-      
+
+      // Menggunakan SweetAlert2 untuk menampilkan pesan sukses
+      Swal.fire({
+        title: "Login Berhasil!",
+        text: `Selamat datang, ${pelangganName}!`,
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        // Aksi setelah dialog ditutup
+        localStorage.setItem("token", token);
+        localStorage.setItem("name", pelangganName);
+        localStorage.setItem("role", "pelanggan");
+        window.location.href = "/dashboard";
+      });
     } catch (err) {
       setError(
         err.response?.data?.message ||
-        err.message ||
-        "Terjadi kesalahan saat login. Silakan coba lagi."
+          err.message ||
+          "Terjadi kesalahan saat login. Silakan coba lagi."
       );
     } finally {
       setIsLoading(false);
@@ -87,7 +99,11 @@ function LoginPelanggan() {
                     </label>
                   </div>
                   <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
-                    <button type="submit" className="btn btn-primary" disabled={isLoading}>
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      disabled={isLoading}
+                    >
                       {isLoading ? "Logging in..." : "Login"}
                     </button>
                   </div>
