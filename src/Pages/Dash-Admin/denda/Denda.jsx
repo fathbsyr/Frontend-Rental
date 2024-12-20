@@ -3,6 +3,7 @@ import axios from "axios";
 import $ from "jquery";
 import "datatables.net";
 import "datatables.net-dt/css/dataTables.dataTables.css";
+import Swal from "sweetalert2";
 
 const Denda = () => {
   const tableRef = useRef(null);
@@ -37,6 +38,51 @@ const Denda = () => {
     }
   }, [loading, error, denda]);
 
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Serius?",
+      text: "Anda yakin ingin menghapus data ini?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const token = localStorage.getItem("token");
+        axios
+          .delete(`http://localhost:8000/api/denda/${id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((response) => {
+            if (response.data.success) {
+              Swal.fire({
+                title: "Terhapus",
+                text: "Data Sudah Terhapus",
+                icon: "success",
+              });
+            } else {
+              Swal.fire({
+                title: "Eror!",
+                text: "Your file has not been deleted.",
+                icon: "error",
+              });
+            }
+          })
+          .catch((error) => {
+            Swal.fire({
+              title: "Eror!",
+              text: "an error occurred",
+              icon: "error",
+            });
+            console.error("Deleting Error", error);
+          });
+      }
+    });
+  };
+
   return (
     <div>
       <h1 className="h3 mb-2 text-gray-800">Table Data Denda</h1>
@@ -57,6 +103,7 @@ const Denda = () => {
                   <th>No</th>
                   <th>Keterangan</th>
                   <th>Pelanggan</th>
+                  <th>Aksi</th>
                 </tr>
               </thead>
               <tfoot>
@@ -64,6 +111,7 @@ const Denda = () => {
                   <th>No</th>
                   <th>Keterangan</th>
                   <th>Pelanggan</th>
+                  <th>Aksi</th>
                 </tr>
               </tfoot>
               <tbody>
@@ -72,6 +120,12 @@ const Denda = () => {
                     <td>{index + 1}</td>
                     <td>{item.keterangan}</td>
                     <td>{item.pelanggan}</td>
+                    <td>
+                      <a href="" className="btn btn-warning btn-sm">Edit</a>
+                      <button className="btn btn-danger btn-sm ml-2" onClick={() => handleDelete(item.id)}>
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

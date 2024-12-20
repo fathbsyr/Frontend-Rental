@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function AddMobil() {
   const [mobil, setMobil] = useState({
@@ -31,14 +32,32 @@ function AddMobil() {
         }
       );
       if (response.data.success) {
-        alert("Data Berhasil Dibuat");
-        navigate("/admin/mobil");
+        // SweetAlert2 untuk pesan sukses
+        Swal.fire({
+          title: "Berhasil!",
+          text: "Data promosi berhasil ditambahkan.",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then(() => {
+          navigate("/admin/promosi");
+        });
       } else {
-        alert("Gagal Menambahkan Mobil");
+        Swal.fire({
+          title: "Gagal!",
+          text: "Data promosi gagal ditambahkan.",
+          icon: "error",
+          confirmButtonText: "Coba Lagi",
+        });
       }
-    } catch (err) {
-      alert("Terjadi kesalahan, silahkan coba lagi");
-      console.error(err);
+    } catch (error) {
+      Swal.fire({
+        title: "Terjadi Kesalahan!",
+        text:
+          err.response?.data?.message ||
+          "Tidak dapat terhubung ke server. Periksa koneksi internet Anda.",
+        icon: "error",
+        confirmButtonText: "Coba Lagi",
+      });
     }
   };
 
@@ -74,7 +93,7 @@ function AddMobil() {
             id="harga"
             name="harga"
             type="number"
-            min='10000000'
+            min="10000000"
             value={mobil.harga}
             onChange={(e) => setMobil({ ...mobil, harga: e.target.value })}
             className="form-control"

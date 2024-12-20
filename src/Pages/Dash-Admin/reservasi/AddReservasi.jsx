@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function AddReservasi() {
   const [formData, setFormData] = useState({
@@ -72,11 +73,32 @@ function AddReservasi() {
         }
       );
       if (response.data.success) {
-        alert("Data Berhasil Dibuat");
-        navigate("/admin/reservasi");
+        // SweetAlert2 untuk pesan sukses
+        Swal.fire({
+          title: "Berhasil!",
+          text: "Data promosi berhasil ditambahkan.",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then(() => {
+          navigate("/admin/reservasi");
+        });
+      } else {
+        Swal.fire({
+          title: "Gagal!",
+          text: "Data promosi gagal ditambahkan.",
+          icon: "error",
+          confirmButtonText: "Coba Lagi",
+        });
       }
     } catch (error) {
-      setError(error.response.data.message);
+      Swal.fire({
+        title: "Terjadi Kesalahan!",
+        text:
+          err.response?.data?.message ||
+          "Tidak dapat terhubung ke server. Periksa koneksi internet Anda.",
+        icon: "error",
+        confirmButtonText: "Coba Lagi",
+      });
     }
   };
 
@@ -159,7 +181,12 @@ function AddReservasi() {
           </select>
         </div>
         <div className="form-group">
-          <button name="submit" type="submit" className="btn btn-primary" onClick={handleSubmit}>
+          <button
+            name="submit"
+            type="submit"
+            className="btn btn-primary"
+            onClick={handleSubmit}
+          >
             Submit
           </button>
         </div>

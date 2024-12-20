@@ -3,6 +3,7 @@ import $ from "jquery";
 import "datatables.net";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function Promosi() {
   const tableRef = useRef(null);
@@ -37,13 +38,60 @@ function Promosi() {
     }
   }, [loading, error, promosi]);
 
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Serius?",
+      text: "Anda yakin ingin menghapus data ini?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const token = localStorage.getItem("token");
+        axios
+          .delete(`http://localhost:8000/api/promosi/${id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((response) => {
+            if (response.data.success) {
+              Swal.fire({
+                title: "Terhapus",
+                text: "Data Sudah Terhapus",
+                icon: "success",
+              });
+            } else {
+              Swal.fire({
+                title: "Eror!",
+                text: "Your file has not been deleted.",
+                icon: "error",
+              });
+            }
+          })
+          .catch((error) => {
+            Swal.fire({
+              title: "Eror!",
+              text: "an error occurred",
+              icon: "error",
+            });
+            console.error("Deleting Error", error);
+          });
+      }
+    });
+  };
+
   return (
     <div>
       <h1 className="h3 mb-2 text-gray-800">Table Data Promosi</h1>
       <p className="mb-4">Tempat Pengelolaan Data Promosi</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-        <a href="/admin/promosi/add" className="btn btn-primary btn-sm">Tambah Data Promosi</a>
+          <a href="/admin/promosi/add" className="btn btn-primary btn-sm">
+            Tambah Data Promosi
+          </a>
         </div>
         <div className="card-body">
           {loading ? (
@@ -57,6 +105,7 @@ function Promosi() {
                   <th>No</th>
                   <th>Mobil</th>
                   <th>Diskon</th>
+                  <th>Aksi</th>
                 </tr>
               </thead>
               <tfoot>
@@ -64,6 +113,7 @@ function Promosi() {
                   <th>No</th>
                   <th>Mobil</th>
                   <th>Diskon</th>
+                  <th>Aksi</th>
                 </tr>
               </tfoot>
               <tbody>
@@ -72,6 +122,20 @@ function Promosi() {
                     <td>{index + 1}</td>
                     <td>{item.mobil}</td>
                     <td>{item.diskon}</td>
+                    <td>
+                      <a
+                        href={`/admin/ulasan/edit/${item.id}`}
+                        className="btn btn-warning btn-sm"
+                      >
+                        Edit
+                      </a>
+                      <button
+                        className="btn btn-danger btn-sm ml-2"
+                        onClick={() => handleDelete(item.id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

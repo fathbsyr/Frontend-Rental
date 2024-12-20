@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function AddPelanggan() {
   const [pelanggan, setPelanggan] = useState({
@@ -44,14 +45,32 @@ function AddPelanggan() {
         }
       );
       if (response.data.success) {
-        alert("Data Pelanggan Berhasil Dibuat");
-        navigate("/admin/pelanggan");
+        // SweetAlert2 untuk pesan sukses
+        Swal.fire({
+          title: "Berhasil!",
+          text: "Data promosi berhasil ditambahkan.",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then(() => {
+          navigate("/admin/promosi");
+        });
       } else {
-        alert("Gagal Menambahkan Pelanggan");
+        Swal.fire({
+          title: "Gagal!",
+          text: "Data promosi gagal ditambahkan.",
+          icon: "error",
+          confirmButtonText: "Coba Lagi",
+        });
       }
-    } catch (err) {
-      alert("Terjadi kesalahan, silahkan coba lagi");
-      console.error(err);
+    } catch (error) {
+      Swal.fire({
+        title: "Terjadi Kesalahan!",
+        text:
+          err.response?.data?.message ||
+          "Tidak dapat terhubung ke server. Periksa koneksi internet Anda.",
+        icon: "error",
+        confirmButtonText: "Coba Lagi",
+      });
     }
   };
 

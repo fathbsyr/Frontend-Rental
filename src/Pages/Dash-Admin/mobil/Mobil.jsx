@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios"; 
+import axios from "axios";
 import $ from "jquery";
 import "datatables.net";
 import "datatables.net-dt/css/dataTables.dataTables.css";
+import Swal from "sweetalert2";
 
 const Mobil = () => {
   const tableRef = useRef(null);
@@ -37,13 +38,61 @@ const Mobil = () => {
     }
   }, [loading, error, mobil]);
 
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Serius?",
+      text: "Anda yakin ingin menghapus data ini?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const token = localStorage.getItem("token");
+        axios.delete(`http://localhost:8000/api/mobil/${id}`
+          , {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        )
+        .then ((response) => {
+          if (response.data.success) {
+            Swal.fire({
+              title: "Terhapus",
+              text: "Data Sudah Terhapus",
+              icon: "success"
+            });
+          } else {
+            Swal.fire({
+              title: "Eror!",
+              text: "Your file has not been deleted.",
+              icon: "error"
+            })
+          }
+        })
+        .catch((error) => {
+          Swal.fire({
+            title: "Eror!",
+            text: "an error occurred",
+            icon: "error"
+          });
+          console.error("Deleting Error", error);
+        })
+      }
+    });
+  }
+
   return (
     <div>
       <h1 className="h3 mb-2 text-gray-800">Table Data Mobil</h1>
       <p className="mb-4">Tempat Pengelolaan Data Mobil</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-        <a href="/admin/mobil/add" className="btn btn-primary btn-sm" >Tambah Data Mobil</a>
+          <a href="/admin/mobil/add" className="btn btn-primary btn-sm">
+            Tambah Data Mobil
+          </a>
         </div>
         <div className="card-body">
           {loading ? (
@@ -60,6 +109,7 @@ const Mobil = () => {
                   <th>Harga</th>
                   <th>Ketersediaan</th>
                   <th>Deskripsi</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tfoot>
@@ -70,6 +120,7 @@ const Mobil = () => {
                   <th>Harga</th>
                   <th>Ketersediaan</th>
                   <th>Deskripsi</th>
+                  <th>Action</th>
                 </tr>
               </tfoot>
               <tbody>
@@ -81,6 +132,12 @@ const Mobil = () => {
                     <td>{item.harga}</td>
                     <td>{item.ketersediaan}</td>
                     <td>{item.deskripsi}</td>
+                    <td>
+                      <a href={`/admin/mobil/edit/${item.id}`} className="btn btn-warning btn-sm">Edit</a>
+                      <button className="btn btn-danger btn-sm" onClick={() => handleDelete(item.id)}>
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
