@@ -43,9 +43,7 @@ const Denda = () => {
       <p className="mb-4">Tempat Pengelolaan Data Denda</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-          <h6 className="m-0 font-weight-bold text-primary">
-            Data Denda
-          </h6>
+        `<a href="/admin/denda/add" className="btn btn-primary btn-sm">Tambah Denda</a>
         </div>
         <div className="card-body">
           {loading ? (

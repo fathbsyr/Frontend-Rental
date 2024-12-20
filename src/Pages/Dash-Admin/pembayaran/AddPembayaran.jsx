@@ -38,6 +38,7 @@ function AddPembayaran() {
           {
             headers: {
               Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
             },
           }
         );
@@ -46,7 +47,9 @@ function AddPembayaran() {
         const reservasiResponse = await axios.get(
           "http://localhost:8000/api/reservasi",
           {
-            
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
         );
         setReservasi(reservasiResponse.data.data);
@@ -54,7 +57,9 @@ function AddPembayaran() {
         const promosiResponse = await axios.get(
           "http://localhost:8000/api/promosi",
           {
-            
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
         );
         setPromosi(promosiResponse.data.data);
@@ -62,7 +67,9 @@ function AddPembayaran() {
         const dendaResponse = await axios.get(
           "http://localhost:8000/api/denda",
           {
-            
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
         );
         setDenda(dendaResponse.data.data);
@@ -128,24 +135,24 @@ function AddPembayaran() {
       <h2>Tambah Pembayaran</h2>
       {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="metode">Metode</label>
-        <select
-          id="metode"
-          name="metode"
-          className="custom-select"
-          value={formData.metode}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Pilih Metode Pembayaran</option>
-          {metodeOptions.map((option) => (
-            <option key={option.id} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
+        <div className="form-group">
+          <label htmlFor="metode">Metode</label>
+          <select
+            id="metode"
+            name="metode"
+            className="custom-select"
+            value={formData.metode}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Pilih Metode Pembayaran</option>
+            {metodeOptions.map((option) => (
+              <option key={option.id} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
         <div className="form-group">
           <label htmlFor="tanggal_bayar">Tanggal Bayar</label>
           <input
@@ -161,20 +168,20 @@ function AddPembayaran() {
         <div className="form-group">
           <label htmlFor="status">Status</label>
           <select
-          id="status"
-          name="status"
-          className="custom-select"
-          value={formData.status}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Status Pembayaran</option>
-          {statusOptions.map((option) => (
-            <option key={option.id} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+            id="status"
+            name="status"
+            className="custom-select"
+            value={formData.status}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Status Pembayaran</option>
+            {statusOptions.map((option) => (
+              <option key={option.id} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="pelanggan_id">Pelanggan</label>
@@ -207,7 +214,7 @@ function AddPembayaran() {
             <option value="">Pilih Reservasi</option>
             {reservasi.map((res) => (
               <option key={res.id} value={res.id}>
-                {res.pelanggan_id}
+                {res.tanggal_mulai}
               </option>
             ))}
           </select>
@@ -259,7 +266,12 @@ function AddPembayaran() {
           />
         </div>
         <div className="form-group">
-          <button name="submit" type="submit" onClick={handleSubmit} className="btn btn-primary">
+          <button
+            name="submit"
+            type="submit"
+            onClick={handleSubmit}
+            className="btn btn-primary"
+          >
             Submit
           </button>
         </div>
