@@ -56,7 +56,7 @@ const Pembayaran = () => {
       <p className="mb-4">Tempat Pengelolaan Data Pembayaran</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-          <h6 className="m-0 font-weight-bold text-primary">Data Pembayaran</h6>
+          <a href="/admin/pembayaran/add" className="btn btn-primary btn-sm" >Tambah Data Pembayaran</a>
         </div>
         <div className="card-body">
           {loading ? (
