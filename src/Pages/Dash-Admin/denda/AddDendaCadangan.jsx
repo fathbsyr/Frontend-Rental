@@ -13,50 +13,45 @@ function AddDenda() {
   const [error, setError] = useState(null); // State to store error message
   const navigate = useNavigate();
 
-  // Fetch data reservasi dari API
   useEffect(() => {
-    const fetchReservasi = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8000/api/reservasi",
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        setReservasi(response.data.data);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-    fetchReservasi();
+    // const fetchReservasi = async () => {
+    //   try {
+    //     const response = await axios.get(
+    //       "http://localhost:8000/api/reservasi",
+    //       {
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //       }
+    //     );
+    //     console.log("Fetched reservasi data:", response.data.data); // Debug
+    //     setReservasi(response.data.data);
+    //   } catch (error) {
+    //     setError(error.message);
+    //   }
+    // };
+    // fetchReservasi();
+    setReservasi([
+      { id: 1, tanggal_mulai: "2024-12-25" },
+      { id: 2, tanggal_mulai: "2024-12-26" },
+    ]);
   }, []);
 
-  // Menghandle perubahan form input
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    console.log(`Field ${name} changed to:`, value);
+    setFormData({
+      ...formData,
+      [name]: name === "reservasi_id" ? parseInt(value, 10) || "" : value,
+    });
   };
 
-  // Menghandle pengiriman form
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+    console.log(formData); // Debug: pastikan reservasi_id berupa integer
     try {
       const token = localStorage.getItem("token");
-
-      // Validasi apakah reservasi_id diisi
-      if (!formData.reservasi_id) {
-        return Swal.fire({
-          title: "Gagal!",
-          text: "Pilih tanggal reservasi terlebih dahulu.",
-          icon: "error",
-          confirmButtonText: "Coba Lagi",
-        });
-      }
-
-      // Kirim data ke backend
       const response = await axios.post(
         "http://localhost:8000/api/denda/create",
         formData,
@@ -67,8 +62,8 @@ function AddDenda() {
           },
         }
       );
-
       if (response.data.success) {
+        // SweetAlert2 untuk pesan sukses
         Swal.fire({
           title: "Berhasil!",
           text: "Data berhasil ditambahkan.",
@@ -103,6 +98,7 @@ function AddDenda() {
         <div className="form-group">
           <label htmlFor="text">Keterangan</label>
           <div className="input-group">
+            <div className="input-group-prepend"></div>
             <input
               id="text"
               name="keterangan"
@@ -113,34 +109,35 @@ function AddDenda() {
             />
           </div>
         </div>
-
-        {/* Pilihan Reservasi berdasarkan tanggal */}
         <div className="form-group">
-          <label htmlFor="reservasi_id">Pilih Tanggal Reservasi</label>
-          <div className="input-group">
+          <label htmlFor="select">Reservasi</label>
+          <div>
             <select
-              id="reservasi_id"
+              id="select"
               name="reservasi_id"
+              className="custom-select"
               value={formData.reservasi_id}
               onChange={handleChange}
-              className="form-control"
             >
               <option value="">Pilih Reservasi</option>
-              {reservasi.length > 0 ? (
-                reservasi.map((item) => (
-                  <option key={item.id} value={item.id}>
+              {reservasi.map((item) => {
+                console.log("Reservasi ID:", item.id, "Type:", typeof item.id);
+                return (
+                  <option key={item.id} value={String(item.id)}>
                     {item.tanggal_mulai}
                   </option>
-                ))
-              ) : (
-                <option value="">Tidak ada reservasi</option>
-              )}
+                );
+              })}
             </select>
           </div>
         </div>
-
         <div className="form-group">
-          <button name="submit" type="submit" className="btn btn-primary">
+          <button
+            name="submit"
+            type="submit"
+            className="btn btn-primary"
+            onClick={handleSubmit}
+          >
             Submit
           </button>
         </div>

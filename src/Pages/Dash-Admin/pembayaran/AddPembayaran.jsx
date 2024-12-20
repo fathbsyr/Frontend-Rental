@@ -14,16 +14,18 @@ function AddPembayaran() {
     denda_id: "",
     total_bayar: "",
   });
-  const [pelanggan, setPelanggan] = useState([]);
   const [promosi, setPromosi] = useState([]);
   const [denda, setDenda] = useState([]);
   const [reservasi, setReservasi] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  
+  // Opsi metode dan status
   const metodeOptions = [
     { id: 1, value: "transfer", label: "Transfer" },
     { id: 2, value: "cash", label: "Cash" },
   ];
+  
   const statusOptions = [
     { id: 1, value: "Belum Lunas", label: "Belum Lunas" },
     { id: 2, value: "Lunas", label: "Lunas" },
@@ -33,45 +35,23 @@ function AddPembayaran() {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const pelangganResponse = await axios.get(
-          "http://localhost:8000/api/pelanggan",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        setPelanggan(pelangganResponse.data.data);
 
-        const reservasiResponse = await axios.get(
-          "http://localhost:8000/api/reservasi",
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        // Fetch data reservasi
+        const reservasiResponse = await axios.get("http://localhost:8000/api/reservasi", {
+          headers: { "Content-Type": "application/json" }
+        });
         setReservasi(reservasiResponse.data.data);
 
-        const promosiResponse = await axios.get(
-          "http://localhost:8000/api/promosi",
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        // Fetch data promosi
+        const promosiResponse = await axios.get("http://localhost:8000/api/promosi", {
+          headers: { "Content-Type": "application/json" }
+        });
         setPromosi(promosiResponse.data.data);
 
-        const dendaResponse = await axios.get(
-          "http://localhost:8000/api/denda",
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        // Fetch data denda
+        const dendaResponse = await axios.get("http://localhost:8000/api/denda", {
+          headers: { "Content-Type": "application/json" }
+        });
         setDenda(dendaResponse.data.data);
       } catch (error) {
         setError(error.message);
@@ -88,18 +68,12 @@ function AddPembayaran() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.post(
-        "http://localhost:8000/api/pembayaran/create",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post("http://localhost:8000/api/pembayaran/create", formData, {
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }
+      });
       if (response.data.success) {
         // SweetAlert2 untuk pesan sukses
         Swal.fire({
@@ -121,9 +95,7 @@ function AddPembayaran() {
     } catch (error) {
       Swal.fire({
         title: "Terjadi Kesalahan!",
-        text:
-          error.response?.data?.message ||
-          "Tidak dapat terhubung ke server. Periksa koneksi internet Anda.",
+        text: error.response?.data?.message || "Tidak dapat terhubung ke server. Periksa koneksi internet Anda.",
         icon: "error",
         confirmButtonText: "Coba Lagi",
       });
@@ -179,24 +151,6 @@ function AddPembayaran() {
             {statusOptions.map((option) => (
               <option key={option.id} value={option.value}>
                 {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="form-group">
-          <label htmlFor="pelanggan_id">Pelanggan</label>
-          <select
-            id="pelanggan_id"
-            name="pelanggan_id"
-            className="custom-select"
-            value={formData.pelanggan_id}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Pilih Pelanggan</option>
-            {pelanggan.map((pel) => (
-              <option key={pel.id} value={pel.id}>
-                {pel.nama}
               </option>
             ))}
           </select>
@@ -269,7 +223,6 @@ function AddPembayaran() {
           <button
             name="submit"
             type="submit"
-            onClick={handleSubmit}
             className="btn btn-primary"
           >
             Submit
