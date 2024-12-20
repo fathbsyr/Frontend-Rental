@@ -42,9 +42,7 @@ const Reservasi = () => {
       <p className="mb-4">Tempat Pengelolaan Data Reservasi</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-          <h6 className="m-0 font-weight-bold text-primary">
-            Data Reservasi
-          </h6>
+            <a href="/admin/reservasi/add" className="btn btn-primary btn-sm" >Tambah Data Reservasi</a>
         </div>
         <div className="card-body">
           {loading ? (

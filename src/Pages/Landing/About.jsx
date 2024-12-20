@@ -147,7 +147,7 @@ function About() {
       </div>
       {/* Banner End */}
     </div>
-  );
+  );console.log('About component rendered');
 }
 
 export default About;
