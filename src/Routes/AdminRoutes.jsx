@@ -23,7 +23,7 @@ const AdminRoutes = () => {
       <Route path="/" element={<Dashboard />} />
       <Route path="mobil" element={<Mobil />} />
       <Route path="mobil/add" element={<AddMobil />} />
-      <Route path="mobil/edit" element={<EditMobil />} />
+      <Route path="mobil/edit/:id" element={<EditMobil />} />
       <Route path="reservasi" element={<Reservasi />} />
       <Route path="reservasi/add" element={<AddReservasi />} />
       <Route path="pelanggan" element={<Pelanggan />} />
