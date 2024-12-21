@@ -146,7 +146,7 @@ const Pelanggan = () => {
                     <td>{item.no_hp}</td>
                     <td>{item.alamat_lengkap}</td>
                     <td>
-                      <a href="{`/admin/pelanggan/edit/${item.id}`}" className="btn btn-warning btn-sm">Edit</a>
+                      <a href={`/admin/pelanggan/edit/${item.id}`} className="btn btn-warning btn-sm">Edit</a>
                       <button className="btn btn-danger btn-sm ml-2" onClick={() => handleDelete(item.id)}>
                         Delete
                       </button>
