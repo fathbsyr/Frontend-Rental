@@ -121,7 +121,7 @@ const Denda = () => {
                     <td>{item.keterangan}</td>
                     <td>{item.pelanggan}</td>
                     <td>
-                      <a href="" className="btn btn-warning btn-sm">Edit</a>
+                      <a href={`/admin/denda/edit/${item.id}`} className="btn btn-warning btn-sm">Edit</a>
                       <button className="btn btn-danger btn-sm ml-2" onClick={() => handleDelete(item.id)}>
                         Delete
                       </button>

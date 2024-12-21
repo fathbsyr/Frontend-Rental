@@ -7,9 +7,11 @@ import Pelanggan from "../Pages/Dash-Admin/pelanggan/Pelanggan";
 import AddPelanggan from "../Pages/Dash-Admin/pelanggan/AddPelanggan";
 import Promosi from "../Pages/Dash-Admin/promosi/Promosi";
 import AddPromosi from "../Pages/Dash-Admin/promosi/AddPromosi";
+import EditPromosi from "../Pages/Dash-Admin/promosi/EditPromosi";
 import Ulasan from "../Pages/Dash-Admin/ulasan/Ulasan";
 import AddUlasan from "../Pages/Dash-Admin/ulasan/AddUlasan";
 import Denda from "../Pages/Dash-Admin/denda/Denda";
+import EditDenda from "../Pages/Dash-Admin/denda/EditDenda";
 import AddDenda from "../Pages/Dash-Admin/denda/AddDenda";
 import Pembayaran from "../Pages/Dash-Admin/pembayaran/Pembayaran";
 import AddReservasi from "../Pages/Dash-Admin/reservasi/AddReservasi";
@@ -30,11 +32,13 @@ const AdminRoutes = () => {
       <Route path="pelanggan/add" element={<AddPelanggan />} />
       <Route path="promosi" element={<Promosi />} />
       <Route path="promosi/add" element={<AddPromosi />} />
+      <Route path="promosi/edit/:id" element={<EditPromosi />} />
       <Route path="ulasan" element={<Ulasan />} />
       <Route path="ulasan/add" element={<AddUlasan />} />
-      <Route path="ulasan/edit" element={<EditUlasan />} />
+      <Route path="ulasan/edit/:id" element={<EditUlasan />} />
       <Route path="denda" element={<Denda />} />
       <Route path="denda/add" element={<AddDenda />} />
+      <Route path="denda/edit/:id" element={<EditDenda />} />
       <Route path="pembayaran" element={<Pembayaran />} />
       <Route path="pembayaran/add" element={<AddPembayaran />} />
       <Route path="*" element={<Navigate to="/admin/" />} />

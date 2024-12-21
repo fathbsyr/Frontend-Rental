@@ -3,15 +3,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-function EditUlasan() {
+function EditDenda() {
   const [formData, setFormData] = useState({
-    komentar: "",
-    pelanggan_id: "",
+    keterangan: "",
+    reservasi_id: "",
   });
 
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const [pelanggan, setPelanggan] = useState([]);
+  const [reservasi, setReservasi] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -20,11 +20,11 @@ function EditUlasan() {
       return;
     }
 
-    const fetchEditUlasan = async () => {
+    const fetchEditDenda = async () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `http://localhost:8000/api/ulasan-edit/${id}`,
+          `http://localhost:8000/api/denda-edit/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -33,8 +33,8 @@ function EditUlasan() {
         );
         if (response.data.success && response.data.data.length > 0) {
           setFormData({
-            komentar: response.data.data[0].komentar || "",
-            pelanggan_id: response.data.data[0].pelanggan_id || "",
+            keterangan: response.data.data[0].keterangan || "",
+            reservasi_id: response.data.data[0].reservasi_id || "",
           });
         } else {
           setError("Data ulasan tidak ditemukan");
@@ -44,11 +44,11 @@ function EditUlasan() {
       }
     };
 
-    const fetchPelanggan = async () => {
+    const fetchReservasi = async () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "http://localhost:8000/api/pelanggan",
+          "http://localhost:8000/api/reservasi",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -57,7 +57,7 @@ function EditUlasan() {
           }
         );
         if (response.data.success && response.data.data.length > 0) {
-          setPelanggan(response.data.data);
+          setReservasi(response.data.data);
         } else {
           setError("Data pelanggan tidak ditemukan");
         }
@@ -66,8 +66,8 @@ function EditUlasan() {
       }
     };
 
-    fetchEditUlasan();
-    fetchPelanggan();
+    fetchEditDenda();
+    fetchReservasi();
   }, [id]);
 
   const handleChange = (e) => {
@@ -81,7 +81,7 @@ function EditUlasan() {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
-        `http://localhost:8000/api/ulasan/${id}`,
+        `http://localhost:8000/api/denda/${id}`,
         formData,
         {
           headers: {
@@ -97,7 +97,7 @@ function EditUlasan() {
           icon: "success",
           confirmButtonText: "OK",
         }).then(() => {
-          navigate("/admin/ulasan");
+          navigate("/admin/denda");
         });
       } else {
         Swal.fire({
@@ -121,37 +121,37 @@ function EditUlasan() {
 
   return (
     <div className="m-5 p-3">
-      <h2>Edit Ulasan</h2>
+      <h2>Edit Denda</h2>
       {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="text">Komentar</label>
+          <label htmlFor="text">Keterangan</label>
           <div className="input-group">
             <div className="input-group-prepend"></div>
             <input
               id="text"
-              name="komentar"
+              name="keterangan"
               type="text"
-              value={formData.komentar}
+              value={formData.keterangan}
               onChange={handleChange}
               className="form-control"
             />
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="select">Pelanggan</label>
+          <label htmlFor="select">Reservasi</label>
           <div>
             <select
               id="select"
-              name="pelanggan_id"
+              name="reservasi_id"
               className="custom-select"
-              value={formData.pelanggan_id}
+              value={formData.reservasi_id}
               onChange={handleChange}
             >
-              <option value="">Pilih Nama Anda</option>
-              {pelanggan.map((pel) => (
-                <option key={pel.id} value={pel.id}>
-                  {pel.nama}
+              <option value="">Pilih Reservasi</option>
+              {reservasi.map((res) => (
+                <option key={res.id} value={res.id}>
+                  {res.tanggal_mulai}
                 </option>
               ))}
             </select>
@@ -171,4 +171,4 @@ function EditUlasan() {
     </div>
   );
 }
-export default EditUlasan;
+export default EditDenda;

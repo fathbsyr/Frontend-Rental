@@ -125,7 +125,7 @@ function Promosi() {
                     <td>{item.diskon}</td>
                     <td>
                       <a
-                        href={`/admin/ulasan/edit/${item.id}`}
+                        href={`/admin/promosi/edit/${item.id}`}
                         className="btn btn-warning btn-sm"
                       >
                         Edit
