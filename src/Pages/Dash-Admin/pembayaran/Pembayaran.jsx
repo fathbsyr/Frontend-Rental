@@ -150,7 +150,7 @@ const Pembayaran = () => {
                     <td>{item.denda}</td>
                     <td>{item.total_bayar}</td>
                     <td>
-                      <a href="" className="btn btn-warning btn-sm">Edit</a>
+                      <a href={`/admin/pembayaran/edit/${item.id}`}className="btn btn-warning btn-sm">Edit</a>
                       <button className="btn btn-danger btn-sm ml-2" onClick={() => handleDelete(item.id)}>
                         Delete
                       </button>
