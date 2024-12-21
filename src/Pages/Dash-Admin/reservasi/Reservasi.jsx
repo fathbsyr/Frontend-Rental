@@ -4,6 +4,7 @@ import "datatables.net";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 import axios from "axios";
 import Swal from "sweetalert2";
+
 const Reservasi = () => {
   const tableRef = useRef(null);
   const [loading, setLoading] = useState(true);
@@ -15,13 +16,12 @@ const Reservasi = () => {
       try {
         const response = await axios.get("http://localhost:8000/api/reservasi");
         if (response.data.success) {
-          console.log("Data reservasi diterima:", response.data.data); // Debug log
           setReservasi(response.data.data);
         } else {
-          setError("Gagal Menampilkan Data Reservasi");
+          setError("Gagal menampilkan data reservasi.");
         }
       } catch (err) {
-        setError(err.message || "An error occurred");
+        setError(err.message || "Terjadi kesalahan saat memuat data.");
       } finally {
         setLoading(false);
       }
@@ -30,25 +30,24 @@ const Reservasi = () => {
   }, []);
 
   useEffect(() => {
-    if (!loading && !error && reservasi.length > 0) {
+    if (!loading && !error && reservasi.length > 0 && tableRef.current) {
       const table = $(tableRef.current).DataTable();
       return () => {
-        table.destroy(false);
+        table.destroy();
       };
     }
   }, [loading, error, reservasi]);
 
   const handleDelete = async (id) => {
-    console.log("ID yang akan dihapus:", id); // Tambahkan log untuk memastikan nilai ID
     if (!id) {
       Swal.fire({
         title: "Error!",
-        text: "ID tidak ditemukan",
+        text: "ID tidak ditemukan.",
         icon: "error",
       });
       return;
     }
-  
+
     Swal.fire({
       title: "Serius?",
       text: "Anda yakin ingin menghapus data ini?",
@@ -57,45 +56,55 @@ const Reservasi = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         const token = localStorage.getItem("token");
-        axios
-          .delete(`http://localhost:8000/api/reservasi/${id}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          })
-          .then((response) => {
-            if (response.data.success) {
-              Swal.fire({
-                title: "Terhapus",
-                text: "Data Sudah Terhapus",
-                icon: "success",
-              });
-              setReservasi((prevReservasi) =>
-                prevReservasi.filter((item) => item.id !== id)
-              ); // Perbarui state setelah penghapusan
-            } else {
-              Swal.fire({
-                title: "Error!",
-                text: "Your file has not been deleted.",
-                icon: "error",
-              });
+        if (!token) {
+          Swal.fire({
+            title: "Error!",
+            text: "Token tidak ditemukan. Harap login kembali.",
+            icon: "error",
+          });
+          return;
+        }
+
+        try {
+          const response = await axios.delete(
+            `http://localhost:8000/api/reservasi/${id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
             }
-          })
-          .catch((error) => {
+          );
+
+          if (response.data.success) {
+            Swal.fire({
+              title: "Terhapus",
+              text: "Data berhasil dihapus.",
+              icon: "success",
+            });
+            setReservasi((prevReservasi) =>
+              prevReservasi.filter((item) => item.id !== id)
+            );
+          } else {
             Swal.fire({
               title: "Error!",
-              text: "Terjadi kesalahan",
+              text: "Gagal menghapus data.",
               icon: "error",
             });
+          }
+        } catch (error) {
+          Swal.fire({
+            title: "Error!",
+            text: "Terjadi kesalahan saat menghapus data.",
+            icon: "error",
           });
+        }
       }
     });
   };
-  
 
   return (
     <div>
@@ -111,7 +120,7 @@ const Reservasi = () => {
           {loading ? (
             <p>Loading...</p>
           ) : error ? (
-            <p>Error Occurred: {error}</p>
+            <p className="text-danger">{error}</p>
           ) : (
             <table ref={tableRef} className="display" style={{ width: "100%" }}>
               <thead>
@@ -138,7 +147,6 @@ const Reservasi = () => {
               </tfoot>
               <tbody>
                 {reservasi.map((item, index) => (
-                  console.log("Data item:", item),
                   <tr key={item.id}>
                     <td>{index + 1}</td>
                     <td>{item.pelanggan}</td>
@@ -147,13 +155,11 @@ const Reservasi = () => {
                     <td>{item.tanggal_akhir}</td>
                     <td>{item.status}</td>
                     <td>
-                      <a className="btn btn-warning btn-sm">Edit</a>
+                    <a href={`/admin/reservasi/edit/${item.id}`} className="btn btn-warning btn-sm">Edit</a>
+
                       <button
                         className="btn btn-danger btn-sm ml-2"
-                        onClick={() => {
-                          console.log("Item yang akan dihapus:", item); // Tambahkan log ini
-                          handleDelete(item.id);
-                        }}
+                        onClick={() => handleDelete(item.id)}
                       >
                         Delete
                       </button>
@@ -168,4 +174,5 @@ const Reservasi = () => {
     </div>
   );
 };
+
 export default Reservasi;
