@@ -40,7 +40,7 @@ function Sidebar() {
 
         {/* Nav Item - pelanggan */}
         <li class="nav-item">
-          <Link to="/admin/Pelanggan" className="nav-link">
+          <Link to="/admin/pelanggan" className="nav-link">
             <i class="fa-solid fa-users"></i>
             <span>Pelanggan</span>
           </Link>

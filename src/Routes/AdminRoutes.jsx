@@ -19,6 +19,7 @@ import AddPembayaran from "../Pages/Dash-Admin/pembayaran/AddPembayaran";
 import EditMobil from "../Pages/Dash-Admin/mobil/EditMobil";
 import EditUlasan from "../Pages/Dash-Admin/ulasan/EditUlasan";
 import EditReservasi from "../Pages/Dash-Admin/reservasi/EditReservasi";
+import EditPelanggan from "../Pages/Dash-Admin/pelanggan/EditPelanggan";
 
 const AdminRoutes = () => {
   return (
@@ -32,6 +33,7 @@ const AdminRoutes = () => {
       <Route path="reservasi/edit/:id" element={<EditReservasi />} />
       <Route path="pelanggan" element={<Pelanggan />} />
       <Route path="pelanggan/add" element={<AddPelanggan />} />
+      <Route path="pelanggan/edit/:id" element={<EditPelanggan />} />
       <Route path="promosi" element={<Promosi />} />
       <Route path="promosi/add" element={<AddPromosi />} />
       <Route path="promosi/edit/:id" element={<EditPromosi />} />
