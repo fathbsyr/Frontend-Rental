@@ -48,16 +48,16 @@ function AddPelanggan() {
         // SweetAlert2 untuk pesan sukses
         Swal.fire({
           title: "Berhasil!",
-          text: "Data promosi berhasil ditambahkan.",
+          text: "Data pelanggan berhasil ditambahkan.",
           icon: "success",
           confirmButtonText: "OK",
         }).then(() => {
-          navigate("/admin/promosi");
+          navigate("/admin/pelanggan");
         });
       } else {
         Swal.fire({
           title: "Gagal!",
-          text: "Data promosi gagal ditambahkan.",
+          text: "Data pelanggan gagal ditambahkan.",
           icon: "error",
           confirmButtonText: "Coba Lagi",
         });

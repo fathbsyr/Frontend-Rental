@@ -35,16 +35,16 @@ function AddMobil() {
         // SweetAlert2 untuk pesan sukses
         Swal.fire({
           title: "Berhasil!",
-          text: "Data promosi berhasil ditambahkan.",
+          text: "Data mobil berhasil ditambahkan.",
           icon: "success",
           confirmButtonText: "OK",
         }).then(() => {
-          navigate("/admin/promosi");
+          navigate("/admin/mobil");
         });
       } else {
         Swal.fire({
           title: "Gagal!",
-          text: "Data promosi gagal ditambahkan.",
+          text: "Data mobil gagal ditambahkan.",
           icon: "error",
           confirmButtonText: "Coba Lagi",
         });

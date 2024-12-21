@@ -76,7 +76,7 @@ function AddReservasi() {
         // SweetAlert2 untuk pesan sukses
         Swal.fire({
           title: "Berhasil!",
-          text: "Data promosi berhasil ditambahkan.",
+          text: "Data reservasi berhasil ditambahkan.",
           icon: "success",
           confirmButtonText: "OK",
         }).then(() => {
@@ -85,7 +85,7 @@ function AddReservasi() {
       } else {
         Swal.fire({
           title: "Gagal!",
-          text: "Data promosi gagal ditambahkan.",
+          text: "Data reservasi gagal ditambahkan.",
           icon: "error",
           confirmButtonText: "Coba Lagi",
         });
