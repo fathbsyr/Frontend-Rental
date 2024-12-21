@@ -39,6 +39,7 @@ function Promosi() {
   }, [loading, error, promosi]);
 
   const handleDelete = async (id) => {
+    console.log("ID yang akan dihapus:", id); // Log ID yang akan dihapus untuk debugging
     Swal.fire({
       title: "Serius?",
       text: "Anda yakin ingin menghapus data ini?",
@@ -131,7 +132,9 @@ function Promosi() {
                       </a>
                       <button
                         className="btn btn-danger btn-sm ml-2"
-                        onClick={() => handleDelete(item.id)}
+                        onClick={() => {handleDelete(item.id),
+                          console.log("Item yang akan dihapus:", item); // Tambahkan log ini
+                        }}
                       >
                         Delete
                       </button>

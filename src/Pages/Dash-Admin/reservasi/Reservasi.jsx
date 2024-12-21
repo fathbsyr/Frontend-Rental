@@ -15,6 +15,7 @@ const Reservasi = () => {
       try {
         const response = await axios.get("http://localhost:8000/api/reservasi");
         if (response.data.success) {
+          console.log("Data reservasi diterima:", response.data.data); // Debug log
           setReservasi(response.data.data);
         } else {
           setError("Gagal Menampilkan Data Reservasi");
@@ -26,7 +27,7 @@ const Reservasi = () => {
       }
     };
     fetchReservasi();
-  }, []); // Empty dependency array to run only once on component mount
+  }, []);
 
   useEffect(() => {
     if (!loading && !error && reservasi.length > 0) {
@@ -38,7 +39,16 @@ const Reservasi = () => {
   }, [loading, error, reservasi]);
 
   const handleDelete = async (id) => {
-    console.log("ID yang akan dihapus:", id); // Log ID yang akan dihapus untuk debugging
+    console.log("ID yang akan dihapus:", id); // Tambahkan log untuk memastikan nilai ID
+    if (!id) {
+      Swal.fire({
+        title: "Error!",
+        text: "ID tidak ditemukan",
+        icon: "error",
+      });
+      return;
+    }
+  
     Swal.fire({
       title: "Serius?",
       text: "Anda yakin ingin menghapus data ini?",
@@ -64,6 +74,9 @@ const Reservasi = () => {
                 text: "Data Sudah Terhapus",
                 icon: "success",
               });
+              setReservasi((prevReservasi) =>
+                prevReservasi.filter((item) => item.id !== id)
+              ); // Perbarui state setelah penghapusan
             } else {
               Swal.fire({
                 title: "Error!",
@@ -82,6 +95,7 @@ const Reservasi = () => {
       }
     });
   };
+  
 
   return (
     <div>

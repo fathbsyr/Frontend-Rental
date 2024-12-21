@@ -3,6 +3,7 @@ import axios from "axios";
 import $ from "jquery";
 import "datatables.net";
 import "datatables.net-dt/css/dataTables.dataTables.css";
+import Swal from "sweetalert2";
 
 const Pembayaran = () => {
   const tableRef = useRef(null);
@@ -50,6 +51,52 @@ const Pembayaran = () => {
     }
   }, [loading, error, pembayaran]);
 
+  const handleDelete = async (id) => {
+    console.log("ID yang akan dihapus:", id); // Log ID yang akan dihapus untuk debugging
+    Swal.fire({
+      title: "Serius?",
+      text: "Anda yakin ingin menghapus data ini?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const token = localStorage.getItem("token");
+        axios
+          .delete(`http://localhost:8000/api/pembayaran/${id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((response) => {
+            if (response.data.success) {
+              Swal.fire({
+                title: "Terhapus",
+                text: "Data Sudah Terhapus",
+                icon: "success",
+              });
+            } else {
+              Swal.fire({
+                title: "Eror!",
+                text: "Your file has not been deleted.",
+                icon: "error",
+              });
+            }
+          })
+          .catch((error) => {
+            Swal.fire({
+              title: "Eror!",
+              text: "an error occurred",
+              icon: "error",
+            });
+            console.error("Deleting Error", error);
+          });
+      }
+    });
+  };
+
   return (
     <div>
       <h1 className="h3 mb-2 text-gray-800">Table Data Pembayaran</h1>
@@ -75,6 +122,7 @@ const Pembayaran = () => {
                   <th>Diskon</th>
                   <th>Denda</th>
                   <th>Total Bayar</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tfoot>
@@ -87,6 +135,7 @@ const Pembayaran = () => {
                   <th>Diskon</th>
                   <th>Denda</th>
                   <th>Total Bayar</th>
+                  <th>Action</th>
                 </tr>
               </tfoot>
               <tbody>
@@ -100,6 +149,12 @@ const Pembayaran = () => {
                     <td>{item.diskon}</td>
                     <td>{item.denda}</td>
                     <td>{item.total_bayar}</td>
+                    <td>
+                      <a href="" className="btn btn-warning btn-sm">Edit</a>
+                      <button className="btn btn-danger btn-sm ml-2" onClick={() => handleDelete(item.id)}>
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

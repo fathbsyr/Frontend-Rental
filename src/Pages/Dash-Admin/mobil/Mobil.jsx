@@ -134,7 +134,7 @@ const Mobil = () => {
                     <td>{item.deskripsi}</td>
                     <td>
                       <a href={`/admin/mobil/edit/${item.id}`} className="btn btn-warning btn-sm">Edit</a>
-                      <button className="btn btn-danger btn-sm" onClick={() => handleDelete(item.id)}>
+                      <button className="btn btn-danger btn-sm m-2" onClick={() => handleDelete(item.id)}>
                         Delete
                       </button>
                     </td>
