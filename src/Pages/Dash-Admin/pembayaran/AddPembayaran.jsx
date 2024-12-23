@@ -38,19 +38,19 @@ function AddPembayaran() {
 
         // Fetch data reservasi
         const reservasiResponse = await axios.get("http://localhost:8000/api/reservasi", {
-          headers: { "Content-Type": "application/json" }
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
         });
         setReservasi(reservasiResponse.data.data);
 
         // Fetch data promosi
         const promosiResponse = await axios.get("http://localhost:8000/api/promosi", {
-          headers: { "Content-Type": "application/json" }
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
         });
         setPromosi(promosiResponse.data.data);
 
         // Fetch data denda
         const dendaResponse = await axios.get("http://localhost:8000/api/denda", {
-          headers: { "Content-Type": "application/json" }
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
         });
         setDenda(dendaResponse.data.data);
       } catch (error) {

@@ -9,6 +9,7 @@ function EditReservasi() {
   const [error, setError] = useState(null);
   const [pelanggan, setPelanggan] = useState([]);
   const [mobil, setMobil] = useState([]);
+
   const [formData, setFormData] = useState({
     tanggal_mulai: "",
     tanggal_akhir: "",
@@ -27,20 +28,23 @@ function EditReservasi() {
     const fetchEditReservasi = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(`http://localhost:8000/api/reservasi/${id}`, {
+        const response = await axios.get(`http://localhost:8000/api/reservasi-edit/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         });
-        const data = response.data.data[0];
-        setFormData({
-          tanggal_mulai: data.tanggal_mulai || "",
-          tanggal_akhir: data.tanggal_akhir || "",
-          pelanggan_id: data.pelanggan_id || "",
-          status: data.status || "",
-          mobil_id: data.mobil_id || "",
-        });
+        if (response.data.success && response.data.data.length > 0) {
+          setFormData({
+            tanggal_mulai: response.data.data[0].tanggal_mulai || "",
+            tanggal_akhir: response.data.data[0].tanggal_akhir || "",
+            pelanggan_id: response.data.data[0].pelanggan_id || "",
+            status: response.data.data[0].status || "",
+            mobil_id: response.data.data[0].mobil_id || "",
+          });
+        } else {
+          setError("Data reservasi tidak ditemukan");
+        }
       } catch (error) {
         setError(error.message || "Api gagal di akses");
       }
@@ -82,6 +86,7 @@ function EditReservasi() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
     if (
       !formData.tanggal_mulai ||
       !formData.tanggal_akhir ||

@@ -14,7 +14,13 @@ const Denda = () => {
   useEffect(() => {
     const fetchDenda = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/denda");
+        const token = localStorage.getItem("token");
+        const response = await axios.get("http://localhost:8000/api/denda", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
         if (response.data.success) {
           setDenda(response.data.data);
         } else {

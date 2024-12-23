@@ -14,7 +14,13 @@ const Reservasi = () => {
   useEffect(() => {
     const fetchReservasi = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/reservasi");
+        const token = localStorage.getItem("token");
+        const response = await axios.get("http://localhost:8000/api/reservasi", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
         if (response.data.success) {
           setReservasi(response.data.data);
         } else {
