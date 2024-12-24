@@ -5,20 +5,20 @@ import "datatables.net";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 import Swal from "sweetalert2";
 
-const Mobil = () => {
+const Ulasan = () => {
   const tableRef = useRef(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [mobil, setMobil] = useState([]);
+  const [ulasan, setUlasan] = useState([]);
 
   useEffect(() => {
-    const fetchMobil = async () => {
+    const fetchUlasan = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/mobil");
+        const response = await axios.get("http://localhost:8000/api/ulasan");
         if (response.data.success) {
-          setMobil(response.data.data);
+          setUlasan(response.data.data);
         } else {
-          setError("Gagal Menampilkan Data Mobil");
+          setError("Gagal Menampilkan Data Ulasan");
         }
       } catch (err) {
         setError(err.message || "An error occurred");
@@ -26,28 +26,28 @@ const Mobil = () => {
         setLoading(false);
       }
     };
-    fetchMobil();
+    fetchUlasan();
   }, []); // Empty dependency array to run only once on component mount
 
   useEffect(() => {
-    if (!loading && !error && mobil.length > 0) {
+    if (!loading && !error && ulasan.length > 0) {
       const table = $(tableRef.current).DataTable();
       return () => {
         table.destroy(false);
       };
     }
-  }, [loading, error, mobil]);
+  }, [loading, error, ulasan]);
 
 
   return (
     <div>
-      <h1 className="h3 mb-2 text-gray-800">Table Data Mobil</h1>
-      <p className="mb-4">Tempat Pengelolaan Data Mobil</p>
+      <h1 className="h3 mb-2 text-gray-800">Table Data Ulasan</h1>
+      <p className="mb-4">Tempat Pengelolaan Data Ulasan</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-          <h6 className="m-0 font-weight-bold text-primary">
-            Data Mobil
-          </h6>
+          <a href="/dashboard/ulasan/add" className="btn btn-primary btn-sm">
+            Buat Ulasan Baru
+          </a>
         </div>
         <div className="card-body">
           {loading ? (
@@ -59,32 +59,23 @@ const Mobil = () => {
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Brand</th>
-                  <th>Nama</th>
-                  <th>Harga</th>
-                  <th>Ketersediaan</th>
-                  <th>Deskripsi</th>
+                  <th>Komentar</th>
+                  <th>Pelanggan</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
                   <th>No</th>
-                  <th>Brand</th>
-                  <th>Nama</th>
-                  <th>Harga</th>
-                  <th>Ketersediaan</th>
-                  <th>Deskripsi</th>
+                  <th>Komentar</th>
+                  <th>Pelanggan</th>
                 </tr>
               </tfoot>
               <tbody>
-                {mobil.map((item, index) => (
+                {ulasan.map((item, index) => (
                   <tr key={item.id}>
                     <td>{index + 1}</td>
-                    <td>{item.brand}</td>
-                    <td>{item.nama}</td>
-                    <td>{item.harga}</td>
-                    <td>{item.ketersediaan}</td>
-                    <td>{item.deskripsi}</td>
+                    <td>{item.komentar}</td>
+                    <td>{item.pelanggan}</td>
                   </tr>
                 ))}
               </tbody>
@@ -96,4 +87,4 @@ const Mobil = () => {
   );
 };
 
-export default Mobil;
+export default Ulasan;

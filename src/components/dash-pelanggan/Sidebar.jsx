@@ -9,7 +9,7 @@ function Sidebar() {
         {/* Sidebar - Brand */}
         <a
           className="sidebar-brand d-flex align-items-center justify-content-center"
-          href="/"
+          href="/dashboard"
         >
           <div className="sidebar-brand-icon rotate-n-15">
           </div>
@@ -33,46 +33,46 @@ function Sidebar() {
         {/* Nav Item - mobil */}
         <li className="nav-item">
           <Link to="/dashboard/mobil" className="nav-link">
-            <i className="fas fa-fw fa-car"></i>
-            <span>Mobil</span>
+            <i className="fas fa-fw fa-car m-2"></i>
+            <span>Mobil Yang Tersedia</span>
           </Link>
         </li>
 
         {/* Nav Item - reservasi */}
         <li class="nav-item">
           <Link to="/dashboard/reservasi" className="nav-link">
-            <i class="fa-solid fa-calendar"></i>
-            <span>Reservasi</span>
+            <i class="fa-solid fa-calendar m-2"></i>
+            <span>Buat Reservasi Kendaraan</span>
           </Link>
         </li>
 
         <li class="nav-item">
           <Link to="/dashboard/pembayaran" className="nav-link">
-            <i class="fa-solid fa-money-bill"></i>
-            <span>Pembayaran</span>
+            <i class="fa-solid fa-money-bill m-2"></i>
+            <span>Buat Pembayaran</span>
           </Link>
         </li>
 
         {/* Nav Item - promosi */}
         <li class="nav-item">
           <Link to="/dashboard/promosi" className="nav-link">
-            <i class="fa-solid fa-tags"></i>
-            <span>Promosi</span>
+            <i class="fa-solid fa-tags m-2"></i>
+            <span>Diskon Yang Tersedia</span>
           </Link>
         </li>
 
         {/* Nav Item - pelanggan */}
         <li class="nav-item">
           <Link to="/dashboard/denda" className="nav-link">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            <span>Denda</span>
+            <i class="fa-solid fa-triangle-exclamation m-2"></i>
+            <span>Histori Denda</span>
           </Link>
         </li>
 
         <li class="nav-item">
           <Link to="/dashboard/ulasan" className="nav-link">
-            <i class="fa-solid fa-file-pen"></i>
-            <span>Ulasan</span>
+            <i class="fa-solid fa-file-pen m-2"></i>
+            <span>Beri Kami Ulasan</span>
           </Link>
         </li>
 

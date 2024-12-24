@@ -59,19 +59,6 @@ function Navbar() {
             </span>
           </Dropdown.Toggle>
           <Dropdown.Menu className="dropdown-menu-right shadow animated--grow-in">
-            <Dropdown.Item href="#">
-              <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
-              Profile
-            </Dropdown.Item>
-            <Dropdown.Item href="#">
-              <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" />
-              Settings
-            </Dropdown.Item>
-            <Dropdown.Item href="#">
-              <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400" />
-              Activity Log
-            </Dropdown.Item>
-            <Dropdown.Divider />
             <Dropdown.Item onClick={handleLogout}>
               <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
               Logout

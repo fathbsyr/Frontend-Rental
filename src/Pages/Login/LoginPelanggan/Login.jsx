@@ -13,6 +13,7 @@ function LoginPelanggan() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
+
     if (!email.trim() || !password.trim()) {
       setError("Email dan password tidak boleh kosong.");
       return;
@@ -20,13 +21,10 @@ function LoginPelanggan() {
 
     setIsLoading(true);
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/login",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post("http://localhost:8000/api/login", {
+        email,
+        password,
+      });
 
       if (response.status === 200 && response.data.status === "success") {
         // SweetAlert2 untuk feedback sukses
@@ -36,9 +34,11 @@ function LoginPelanggan() {
           icon: "success",
           confirmButtonText: "OK",
         }).then(() => {
+          // Menyimpan data ke localStorage
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("name", response.data.name);
           localStorage.setItem("role", response.data.role);
+          localStorage.setItem("pelanggan_id", response.data.pelanggan_id); // Menggunakan response.data.pelanggan_id
           navigate("/dashboard");
         });
       } else {
