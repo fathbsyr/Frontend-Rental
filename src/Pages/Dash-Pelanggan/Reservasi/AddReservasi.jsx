@@ -8,19 +8,12 @@ function AddReservasi() {
     tanggal_mulai: "",
     tanggal_akhir: "",
     pelanggan_id: "",
-    status: "",
     mobil_id: "",
   });
   const [pelanggan, setPelanggan] = useState([]);
   const [mobil, setMobil] = useState([]);
   const navigate = useNavigate();
   const [error, setError] = useState(null);
-
-  const statusOptions = [
-    { id: 1, value: "pending", label: "Pending" },
-    { id: 2, value: "complete", label: "Complete" },
-    { id: 3, value: "cancel", label: "Cancel" },
-  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,7 +28,16 @@ function AddReservasi() {
             },
           }
         );
-        setPelanggan(pelangganResponse.data.data);
+        const pelangganId = localStorage.getItem("pelanggan_id"); // Ambil id pelanggan dari localStorage
+         // Cek ID pelanggan yang digunakan untuk filter
+        // Filter denda berdasarkan ID pelanggan yang login
+        const filteredPelanggan = pelangganResponse.data.data.filter(
+          (pelanggan) => {
+            return pelanggan.id === parseInt(pelangganId); // Filter berdasarkan ID pelanggan
+          }
+        );
+        setPelanggan(filteredPelanggan); // Set pelanggan yang sudah difilter
+        setFormData({ ...formData, pelanggan_id: filteredPelanggan[0]?.id });
         const mobilResponse = await axios.get(
           "http://localhost:8000/api/mobil",
           {
@@ -94,7 +96,7 @@ function AddReservasi() {
       Swal.fire({
         title: "Terjadi Kesalahan!",
         text:
-          err.response?.data?.message ||
+          error.response?.data?.message ||
           "Tidak dapat terhubung ke server. Periksa koneksi internet Anda.",
         icon: "error",
         confirmButtonText: "Coba Lagi",
@@ -104,7 +106,7 @@ function AddReservasi() {
 
   return (
     <div className="m-3 p-3">
-      <h2>Tambah Reservasi</h2>
+      <h2>Buat Reservasi</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="tanggal_mulai">Tanggal Mulai</label>
@@ -141,23 +143,6 @@ function AddReservasi() {
             {pelanggan.map((pel) => (
               <option key={pel.id} value={pel.id}>
                 {pel.nama}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="form-group">
-          <label htmlFor="status">Status</label>
-          <select
-            id="status"
-            name="status"
-            className="custom-select"
-            value={formData.status}
-            onChange={handleChange}
-          >
-            <option value="">Pilih Status</option>
-            {statusOptions.map((option) => (
-              <option key={option.id} value={option.value}>
-                {option.label}
               </option>
             ))}
           </select>

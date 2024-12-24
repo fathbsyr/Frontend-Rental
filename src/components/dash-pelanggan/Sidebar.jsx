@@ -22,7 +22,7 @@ function Sidebar() {
         {/* Nav Item - Dashboard */}
         <li className="nav-item">
             <Link to="/dashboard" className="nav-link">
-            <i className="fas fa-fw fa-tachometer-alt"></i>
+            <i className="fas fa-fw fa-tachometer-alt m-2"></i>
             <span>Dashboard</span>
             </Link>
         </li>
@@ -49,7 +49,7 @@ function Sidebar() {
         <li class="nav-item">
           <Link to="/dashboard/pembayaran" className="nav-link">
             <i class="fa-solid fa-money-bill m-2"></i>
-            <span>Buat Pembayaran</span>
+            <span>Tagihan Anda</span>
           </Link>
         </li>
 

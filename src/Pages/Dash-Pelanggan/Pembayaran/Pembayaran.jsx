@@ -64,11 +64,11 @@ const Pembayaran = () => {
 
   return (
     <div>
-      <h1 className="h3 mb-2 text-gray-800">Table Data Pembayaran</h1>
-      <p className="mb-4">Tempat Pengelolaan Data Pembayaran</p>
+      <h1 className="h3 mb-2 text-gray-800">Tagihan</h1>
+      <p className="mb-4">Berikut Adalah Tagihan Anda</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-          <a href="/admin/pembayaran/add" className="btn btn-primary btn-sm" >Tambah Data Pembayaran</a>
+          <h6 className="m-0 font-weight-bold text-primary">Tagihan Anda</h6>
         </div>
         <div className="card-body">
           {loading ? (

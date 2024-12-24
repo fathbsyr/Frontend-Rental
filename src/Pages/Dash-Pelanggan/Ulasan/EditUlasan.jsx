@@ -1,51 +1,75 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2"; // Import SweetAlert2
+import Swal from "sweetalert2";
 
-function AddUlasan() {
+function EditUlasan() {
   const [formData, setFormData] = useState({
     komentar: "",
     pelanggan_id: "",
   });
-  const [pelanggan, setPelanggan] = useState([]);
+
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const [pelanggan, setPelanggan] = useState([]);
+  const { id } = useParams();
 
   useEffect(() => {
+    if (!id) {
+      setError("ID ulasan tidak ditemukan");
+      return;
+    }
+
+    const fetchEditUlasan = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          `http://localhost:8000/api/ulasan-edit/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (response.data.success && response.data.data.length > 0) {
+          setFormData({
+            komentar: response.data.data[0].komentar || "",
+            pelanggan_id: response.data.data[0].pelanggan_id || "",
+          });
+        } else {
+          setError("Data ulasan tidak ditemukan");
+        }
+      } catch (error) {
+        setError(error.message || "Api gagal di akses");
+      }
+    };
+
     const fetchPelanggan = async () => {
       try {
         const token = localStorage.getItem("token");
-        const pelangganResponse = await axios.get(
+        const response = await axios.get(
           "http://localhost:8000/api/pelanggan",
           {
             headers: {
               Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
             },
           }
         );
-        if (pelangganResponse.data.success) {
-          const pelangganId = localStorage.getItem("pelanggan_id"); // Ambil id pelanggan dari localStorage
-           // Cek ID pelanggan yang digunakan untuk filter
-
-          // Filter denda berdasarkan ID pelanggan yang login
-          const filteredPelanggan = pelangganResponse.data.data.filter(
-            (pelanggan) => {
-              return pelanggan.id === parseInt(pelangganId); // Filter berdasarkan ID pelanggan
-            }
-          );
-
-          setPelanggan(filteredPelanggan); // Set pelanggan yang sudah difilter
-          setFormData({ ...formData, pelanggan_id: filteredPelanggan[0]?.id }); // Set pelanggan_id default
+        if (response.data.success && response.data.data.length > 0) {
+          setPelanggan(response.data.data);
         } else {
-          setError(pelangganResponse.data.message);
+          setError("Data pelanggan tidak ditemukan");
         }
       } catch (error) {
-        setError(error.message);
+        setError(error.message || "Api gagal di akses");
       }
     };
+
+    fetchEditUlasan();
     fetchPelanggan();
-  }, []);
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,8 +81,8 @@ function AddUlasan() {
     setError(null);
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.post(
-        "http://localhost:8000/api/ulasan/create",
+      const response = await axios.put(
+        `http://localhost:8000/api/ulasan/${id}`,
         formData,
         {
           headers: {
@@ -68,19 +92,18 @@ function AddUlasan() {
         }
       );
       if (response.data.success) {
-        // SweetAlert2 untuk pesan sukses
         Swal.fire({
           title: "Berhasil!",
-          text: "Data berhasil ditambahkan.",
+          text: "Data berhasil diubah",
           icon: "success",
           confirmButtonText: "OK",
         }).then(() => {
-          navigate("/dashboard/ulasan");
+          navigate("/admin/ulasan");
         });
       } else {
         Swal.fire({
           title: "Gagal!",
-          text: "Data gagal ditambahkan.",
+          text: "Data ulasan gagal diubah",
           icon: "error",
           confirmButtonText: "Coba Lagi",
         });
@@ -99,7 +122,7 @@ function AddUlasan() {
 
   return (
     <div className="m-5 p-3">
-      <h2>Buat Ulasan</h2>
+      <h2>Edit Ulasan Anda</h2>
       {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -126,7 +149,7 @@ function AddUlasan() {
               value={formData.pelanggan_id}
               onChange={handleChange}
             >
-              <option>Pilih Nama Anda</option>
+              <option value="">Pilih Nama Anda</option>
               {pelanggan.map((pel) => (
                 <option key={pel.id} value={pel.id}>
                   {pel.nama}
@@ -136,7 +159,12 @@ function AddUlasan() {
           </div>
         </div>
         <div className="form-group">
-          <button name="submit" type="submit" className="btn btn-primary">
+          <button
+            name="submit"
+            type="submit"
+            className="btn btn-primary"
+            onClick={handleSubmit}
+          >
             Submit
           </button>
         </div>
@@ -144,5 +172,4 @@ function AddUlasan() {
     </div>
   );
 }
-
-export default AddUlasan;
+export default EditUlasan;

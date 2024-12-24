@@ -6,6 +6,7 @@ import Reservasi from "../Pages/Dash-Pelanggan/Reservasi/Reservasi";
 import AddReservasi from "../Pages/Dash-Pelanggan/Reservasi/AddReservasi";
 import Ulasan from "../Pages/Dash-Pelanggan/Ulasan/Ulasan";
 import AddUlasan from "../Pages/Dash-Pelanggan/Ulasan/AddUlasan";
+import EditUlasan from "../Pages/Dash-Pelanggan/Ulasan/EditUlasan";
 import Pembayaran from "../Pages/Dash-Pelanggan/Pembayaran/Pembayaran";
 import Denda from "../Pages/Dash-Pelanggan/Denda";
 const PelangganRoutes = () => {
@@ -19,6 +20,7 @@ const PelangganRoutes = () => {
         <Route path="promosi" element={<Promosi />} />
         <Route path="ulasan" element={<Ulasan />} />
         <Route path="ulasan/add" element={<AddUlasan />} />
+        <Route path="ulasan/edit/:id" element={<EditUlasan />} />
         <Route path="pembayaran" element={<Pembayaran />} />
         <Route path="denda" element={<Denda />} />
         <Route path="*" element={<Navigate to="/dashboard/" />} />

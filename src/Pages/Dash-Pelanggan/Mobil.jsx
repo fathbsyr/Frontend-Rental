@@ -41,12 +41,12 @@ const Mobil = () => {
 
   return (
     <div>
-      <h1 className="h3 mb-2 text-gray-800">Table Data Mobil</h1>
-      <p className="mb-4">Tempat Pengelolaan Data Mobil</p>
+      <h1 className="h3 mb-2 text-gray-800">Mobil</h1>
+      <p className="mb-4">Mobil-Mobil Mewah Yang Tersedia</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
           <h6 className="m-0 font-weight-bold text-primary">
-            Data Mobil
+            Mobil
           </h6>
         </div>
         <div className="card-body">

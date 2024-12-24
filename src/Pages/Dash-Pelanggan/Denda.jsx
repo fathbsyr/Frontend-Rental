@@ -57,8 +57,8 @@ const Denda = () => {
 
   return (
     <div>
-      <h1 className="h3 mb-2 text-gray-800">Table Data Denda</h1>
-      <p className="mb-4">Tempat Pengelolaan Data Denda</p>
+      <h1 className="h3 mb-2 text-gray-800">Denda</h1>
+      <p className="mb-4">Denda Yang Anda Terima</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
           <h6 className="m-0 font-weight-bold text-primary">Data Denda</h6>

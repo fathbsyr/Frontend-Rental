@@ -35,8 +35,8 @@ const Reservasi = () => {
         } else {
           setError("Anda Belum Melakukan Reservasi");
         }
-      } catch (err) {
-        setError(err.message || "Terjadi kesalahan saat memuat data.");
+      } catch (error) {
+        setError(error.message || "Terjadi kesalahan saat memuat data.");
       } finally {
         setLoading(false);
       }
@@ -56,8 +56,8 @@ const Reservasi = () => {
 
   return (
     <div>
-      <h1 className="h3 mb-2 text-gray-800">Table Data Reservasi</h1>
-      <p className="mb-4">Tempat Pengelolaan Data Reservasi</p>
+      <h1 className="h3 mb-2 text-gray-800">Reservasi</h1>
+      <p className="mb-4">History Reservasi Anda</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
           <a href="/dashboard/reservasi/add" className="btn btn-primary btn-sm">

@@ -40,8 +40,8 @@ function Promosi() {
 
   return (
     <div>
-      <h1 className="h3 mb-2 text-gray-800">Table Data Promosi</h1>
-      <p className="mb-4">Tempat Pengelolaan Data Promosi</p>
+      <h1 className="h3 mb-2 text-gray-800">Diskon</h1>
+      <p className="mb-4">Diskon Yang Tersedia</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
           <h6 className="m-0 font-weight-bold text-primary">Data Mobil Yang Berdiskon</h6>

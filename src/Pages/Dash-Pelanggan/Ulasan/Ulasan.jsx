@@ -16,7 +16,16 @@ const Ulasan = () => {
       try {
         const response = await axios.get("http://localhost:8000/api/ulasan");
         if (response.data.success) {
-          setUlasan(response.data.data);
+          const pelangganId = localStorage.getItem("pelanggan_id"); // Ambil id pelanggan dari localStorage
+
+          // Filter denda berdasarkan nama pelanggan yang login
+          const filteredUlasan = response.data.data.filter((ulasan) => {
+            const storedName = localStorage.getItem("name"); // Ambil nama pelanggan dari localStorage
+            return ulasan.pelanggan === storedName; // Filter berdasarkan nama pelanggan
+          });
+
+          // Pastikan data sudah terfilter
+          setUlasan(filteredUlasan);
         } else {
           setError("Gagal Menampilkan Data Ulasan");
         }
@@ -38,11 +47,10 @@ const Ulasan = () => {
     }
   }, [loading, error, ulasan]);
 
-
   return (
     <div>
-      <h1 className="h3 mb-2 text-gray-800">Table Data Ulasan</h1>
-      <p className="mb-4">Tempat Pengelolaan Data Ulasan</p>
+      <h1 className="h3 mb-2 text-gray-800">Ulasan</h1>
+      <p className="mb-4">Ulasan Anda Kepada Kami</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
           <a href="/dashboard/ulasan/add" className="btn btn-primary btn-sm">
@@ -61,6 +69,7 @@ const Ulasan = () => {
                   <th>No</th>
                   <th>Komentar</th>
                   <th>Pelanggan</th>
+                  <th>Aksi</th>
                 </tr>
               </thead>
               <tfoot>
@@ -68,6 +77,7 @@ const Ulasan = () => {
                   <th>No</th>
                   <th>Komentar</th>
                   <th>Pelanggan</th>
+                  <th>Aksi</th>
                 </tr>
               </tfoot>
               <tbody>
@@ -76,6 +86,20 @@ const Ulasan = () => {
                     <td>{index + 1}</td>
                     <td>{item.komentar}</td>
                     <td>{item.pelanggan}</td>
+                    <td>
+                      <a
+                        href={`/dashboard/ulasan/edit/${item.id}`}
+                        className="btn btn-warning btn-sm"
+                      >
+                        Edit
+                      </a>
+                      <button
+                        className="btn btn-danger btn-sm ml-2"
+                        onClick={() => handleDelete(item.id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
