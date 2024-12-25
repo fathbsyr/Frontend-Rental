@@ -65,29 +65,29 @@ function Contact() {
                 <div className="d-flex mb-3">
                   <i className="fa fa-2x fa-map-marker-alt text-primary flex-shrink-0 mr-3" />
                   <div className="mt-n1">
-                    <h5 className="text-light">Head Office</h5>
-                    <p>123 Street, New York, USA</p>
+                    <h5 className="text-light">Kantor Utama</h5>
+                    <p>Indonesia, Depok</p>
                   </div>
                 </div>
                 <div className="d-flex mb-3">
                   <i className="fa fa-2x fa-map-marker-alt text-primary flex-shrink-0 mr-3" />
                   <div className="mt-n1">
-                    <h5 className="text-light">Branch Office</h5>
-                    <p>123 Street, New York, USA</p>
+                    <h5 className="text-light">Kantor Cabang</h5>
+                    <p>Indonesia, Depok</p>
                   </div>
                 </div>
                 <div className="d-flex mb-3">
                   <i className="fa fa-2x fa-envelope-open text-primary flex-shrink-0 mr-3" />
                   <div className="mt-n1">
                     <h5 className="text-light">Customer Service</h5>
-                    <p>customer@example.com</p>
+                    <p>el-rent@car.com</p>
                   </div>
                 </div>
                 <div className="d-flex">
                   <i className="fa fa-2x fa-envelope-open text-primary flex-shrink-0 mr-3" />
                   <div className="mt-n1">
                     <h5 className="text-light">Return &amp; Refund</h5>
-                    <p className="m-0">refund@example.com</p>
+                    <p className="m-0">el-rent@car.com</p>
                   </div>
                 </div>
               </div>
