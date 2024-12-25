@@ -123,7 +123,7 @@ function LoginPelanggan() {
               </div>
               <div className="card-footer text-center py-3">
                 <div className="small">
-                  <a href="register.html">Need an account? Sign up!</a>
+                  <a href="/registrasi">Belum Punya Akun? Registrasi</a>
                 </div>
               </div>
             </div>

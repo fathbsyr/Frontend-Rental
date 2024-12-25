@@ -5,6 +5,7 @@ import About from "../Pages/Landing/About"
 import Contact from "../Pages/Landing/Contact"
 import LoginAdmin from "../Pages/Login/LoginAdmin/Login";
 import LoginPelanggan from "../Pages/Login/LoginPelanggan/Login";
+import Registrasi from "../Pages/Login/LoginPelanggan/Registrasi";
 function LandingRoutes() {
   return (
     <Routes>
@@ -15,6 +16,7 @@ function LandingRoutes() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/login-admin" element={<LoginAdmin />} />
       <Route path="/login" element={<LoginPelanggan />} />
+      <Route path="/registrasi" element={<Registrasi />} />
     </Routes>
   );
 }
