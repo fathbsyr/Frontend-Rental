@@ -20,26 +20,24 @@ function About() {
       <div className="container-fluid py-5">
         <div className="container pt-5 pb-3">
           <h1 className="display-4 text-uppercase text-center mb-5">
-            Welcome To <span className="text-primary">Royal Cars</span>
+            Welcome To <span className="text-primary">El-Rental</span>
           </h1>
           <div className="row justify-content-center">
             <div className="col-lg-10 text-center">
               <img
                 className="w-75 mb-4"
-                src="https://f1rstmotors.com/_next/image?url=https%3A%2F%2Ff1rst-motors.s3.me-central-1.amazonaws.com%2Fblog%2F1709638335043-blob&w=3840&q=100"
+                src="../src/assets/landing/img/about.png"
                 alt
               />
               <p>
-                Justo et eos et ut takimata sed sadipscing dolore lorem, et
-                elitr labore labore voluptua no rebum sed, stet voluptua amet
-                sed elitr ea dolor dolores no clita. Dolores diam magna clita ea
-                eos amet, amet rebum voluptua vero vero sed clita accusam
-                takimata. Nonumy labore ipsum sea voluptua sea eos sit justo, no
-                ipsum sanctus sanctus no et no ipsum amet, tempor labore est
-                labore no. Eos diam eirmod lorem ut eirmod, ipsum diam
-                sadipscing stet dolores elitr elitr eirmod dolore. Magna elitr
-                accusam takimata labore, et at erat eirmod consetetur tempor
-                eirmod invidunt est, ipsum nonumy at et.
+                Royal Cars hadir untuk memberikan pengalaman terbaik dalam
+                menyewa mobil. Dengan layanan profesional dan armada kendaraan
+                mewah yang terawat, kami siap memenuhi kebutuhan perjalanan
+                Anda, baik untuk urusan bisnis, liburan, maupun acara spesial
+                lainnya. Kami memahami bahwa kenyamanan, keamanan, dan kemudahan
+                adalah prioritas utama bagi pelanggan. Oleh karena itu, kami
+                berkomitmen untuk menyediakan layanan terbaik yang sesuai dengan
+                kebutuhan Anda, kapan saja dan di mana saja.
               </p>
             </div>
           </div>
@@ -103,18 +101,19 @@ function About() {
               >
                 <img
                   className="img-fluid flex-shrink-0 ml-n5 w-50 mr-4"
-                  src="img/banner-left.png"
-                  alt
+                  src="../src/assets/landing/img/banner-left.png"
+                  alt="Join as a Driver"
                 />
                 <div className="text-right">
                   <h3 className="text-uppercase text-light mb-3">
-                    Want to be driver?
+                    Join Our Team as a Driver
                   </h3>
                   <p className="mb-4">
-                    Lorem justo sit sit ipsum eos lorem kasd, kasd labore
+                    Take control of your career and earn with flexibility. Start
+                    driving today!
                   </p>
-                  <a className="btn btn-primary py-2 px-4" href>
-                    Start Now
+                  <a className="btn btn-primary py-2 px-4" href="#">
+                    Apply Now
                   </a>
                 </div>
               </div>
@@ -126,19 +125,20 @@ function About() {
               >
                 <div className="text-left">
                   <h3 className="text-uppercase text-light mb-3">
-                    Looking for a car?
+                    Looking for a Car to Rent?
                   </h3>
                   <p className="mb-4">
-                    Lorem justo sit sit ipsum eos lorem kasd, kasd labore
+                    Find reliable and comfortable cars at the best prices. Book
+                    yours today!
                   </p>
-                  <a className="btn btn-primary py-2 px-4" href>
-                    Start Now
+                  <a className="btn btn-primary py-2 px-4" href="#">
+                    Explore Now
                   </a>
                 </div>
                 <img
                   className="img-fluid flex-shrink-0 mr-n5 w-50 ml-4"
-                  src="img/banner-right.png"
-                  alt
+                  src="../src/assets/landing/img/banner-right.png"
+                  alt="Rent a Car"
                 />
               </div>
             </div>
@@ -147,7 +147,8 @@ function About() {
       </div>
       {/* Banner End */}
     </div>
-  );console.log('About component rendered');
+  );
+  console.log("About component rendered");
 }
 
 export default About;

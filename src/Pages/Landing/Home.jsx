@@ -10,7 +10,11 @@ function Home() {
         >
           <div className="carousel-inner">
             <div className="carousel-item active">
-              <img className="w-100" src="https://images.bisnis.com/uploads/images/nissan-gt-r-nismo-gt3-2018-.jpg" alt="Image" />
+              <img
+                className="w-100"
+                src="https://images.bisnis.com/uploads/images/nissan-gt-r-nismo-gt3-2018-.jpg"
+                alt="Image"
+              />
               <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
                 <div className="p-3" style={{ maxWidth: 900 }}>
                   <h4 className="text-white text-uppercase mb-md-3">
@@ -26,7 +30,11 @@ function Home() {
               </div>
             </div>
             <div className="carousel-item">
-              <img className="w-100" src="../../../src/assets/landing/img/carousel-2.jpg" alt="Image" />
+              <img
+                className="w-100"
+                src="../../../src/assets/landing/img/carousel-2.jpg"
+                alt="Image"
+              />
               <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
                 <div className="p-3" style={{ maxWidth: 900 }}>
                   <h4 className="text-white text-uppercase mb-md-3">
@@ -68,22 +76,20 @@ function Home() {
         <div className="container pt-5 pb-3">
           <h1 className="display-1 text-primary text-center">01</h1>
           <h1 className="display-4 text-uppercase text-center mb-5">
-            Welcome To <span className="text-primary">Royal Cars</span>
+            Welcome To <span className="text-primary">El-Rental</span>
           </h1>
           <div className="row justify-content-center">
             <div className="col-lg-10 text-center">
-              <img className="w-75 mb-4" src="img/about.png" alt />
+              <img className="w-75 mb-4" src="../src/assets/landing/img/about.png" alt />
               <p>
-                Justo et eos et ut takimata sed sadipscing dolore lorem, et
-                elitr labore labore voluptua no rebum sed, stet voluptua amet
-                sed elitr ea dolor dolores no clita. Dolores diam magna clita ea
-                eos amet, amet rebum voluptua vero vero sed clita accusam
-                takimata. Nonumy labore ipsum sea voluptua sea eos sit justo, no
-                ipsum sanctus sanctus no et no ipsum amet, tempor labore est
-                labore no. Eos diam eirmod lorem ut eirmod, ipsum diam
-                sadipscing stet dolores elitr elitr eirmod dolore. Magna elitr
-                accusam takimata labore, et at erat eirmod consetetur tempor
-                eirmod invidunt est, ipsum nonumy at et.
+                Royal Cars hadir untuk memberikan pengalaman terbaik dalam
+                menyewa mobil. Dengan layanan profesional dan armada kendaraan
+                mewah yang terawat, kami siap memenuhi kebutuhan perjalanan
+                Anda, baik untuk urusan bisnis, liburan, maupun acara spesial
+                lainnya. Kami memahami bahwa kenyamanan, keamanan, dan kemudahan
+                adalah prioritas utama bagi pelanggan. Oleh karena itu, kami
+                berkomitmen untuk menyediakan layanan terbaik yang sesuai dengan
+                kebutuhan Anda, kapan saja dan di mana saja.
               </p>
             </div>
           </div>
