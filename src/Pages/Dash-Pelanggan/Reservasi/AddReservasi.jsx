@@ -10,6 +10,7 @@ function AddReservasi() {
     pelanggan_id: "",
     mobil_id: "",
   });
+  const [loading, setLoading] = useState(false);
   const [pelanggan, setPelanggan] = useState([]);
   const [mobil, setMobil] = useState([]);
   const navigate = useNavigate();
@@ -62,6 +63,8 @@ function AddReservasi() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+
+    setLoading(true);
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
@@ -101,6 +104,8 @@ function AddReservasi() {
         icon: "error",
         confirmButtonText: "Coba Lagi",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -117,6 +122,7 @@ function AddReservasi() {
             value={formData.tanggal_mulai}
             onChange={handleChange}
             className="form-control"
+            required
           />
         </div>
         <div className="form-group">
@@ -128,6 +134,7 @@ function AddReservasi() {
             value={formData.tanggal_akhir}
             onChange={handleChange}
             className="form-control"
+            required
           />
         </div>
         <div className="form-group">
@@ -138,6 +145,7 @@ function AddReservasi() {
             className="custom-select"
             value={formData.pelanggan_id}
             onChange={handleChange}
+            required
           >
             <option value="">Pilih Nama Anda</option>
             {pelanggan.map((pel) => (
@@ -155,6 +163,7 @@ function AddReservasi() {
             className="custom-select"
             value={formData.mobil_id}
             onChange={handleChange}
+            required
           >
             <option value="">Pilih Mobil</option>
             {mobil.map((mob) => (
@@ -170,8 +179,9 @@ function AddReservasi() {
             type="submit"
             className="btn btn-primary"
             onClick={handleSubmit}
+            disabled={loading}
           >
-            Submit
+            {loading ? "Loading..." : "Pesan Reservasi"}
           </button>
         </div>
       </form>

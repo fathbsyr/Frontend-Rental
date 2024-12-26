@@ -3,8 +3,8 @@ import Reservasi from "./Reservasi/Reservasi";
 function Dashboard () {
     return (
         <>
-        <Reservasi />
         <Pembayaran />
+        <Reservasi />
         </>
     )
 }

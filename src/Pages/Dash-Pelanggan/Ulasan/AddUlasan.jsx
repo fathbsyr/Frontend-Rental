@@ -8,6 +8,7 @@ function AddUlasan() {
     komentar: "",
     pelanggan_id: "",
   });
+  const [loading, setLoading] = useState(false);
   const [pelanggan, setPelanggan] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -55,6 +56,8 @@ function AddUlasan() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+
+    setLoading(true);
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
@@ -94,6 +97,8 @@ function AddUlasan() {
         icon: "error",
         confirmButtonText: "Coba Lagi",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -136,8 +141,10 @@ function AddUlasan() {
           </div>
         </div>
         <div className="form-group">
-          <button name="submit" type="submit" className="btn btn-primary">
-            Submit
+          <button name="submit" type="submit" className="btn btn-primary"
+            disabled={loading}
+          >
+            {loading ? "Loading..." : "Kirim Ulasan"}
           </button>
         </div>
       </form>

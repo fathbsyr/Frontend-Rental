@@ -4,6 +4,7 @@ import $ from "jquery";
 import "datatables.net";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Mobil = () => {
   const tableRef = useRef(null);
@@ -90,9 +91,9 @@ const Mobil = () => {
       <p className="mb-4">Tempat Pengelolaan Data Mobil</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-          <a href="/admin/mobil/add" className="btn btn-primary btn-sm">
+          <Link to="/admin/mobil/add" className="btn btn-primary btn-sm">
             Tambah Data Mobil
-          </a>
+          </Link>
         </div>
         <div className="card-body">
           {loading ? (
@@ -133,7 +134,7 @@ const Mobil = () => {
                     <td>{item.ketersediaan}</td>
                     <td>{item.deskripsi}</td>
                     <td>
-                      <a href={`/admin/mobil/edit/${item.id}`} className="btn btn-warning btn-sm">Edit</a>
+                      <Link to={`/admin/mobil/edit/${item.id}`} className="btn btn-warning btn-sm">Edit</Link>
                       <button className="btn btn-danger btn-sm m-2" onClick={() => handleDelete(item.id)}>
                         Delete
                       </button>

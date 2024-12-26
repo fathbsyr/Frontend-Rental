@@ -4,6 +4,7 @@ import $ from "jquery";
 import "datatables.net";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Denda = () => {
   const tableRef = useRef(null);
@@ -95,7 +96,7 @@ const Denda = () => {
       <p className="mb-4">Tempat Pengelolaan Data Denda</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-        `<a href="/admin/denda/add" className="btn btn-primary btn-sm">Tambah Denda</a>
+         <Link to="/admin/denda/add" className="btn btn-primary btn-sm">Tambah Denda</Link>
         </div>
         <div className="card-body">
           {loading ? (
@@ -127,7 +128,7 @@ const Denda = () => {
                     <td>{item.keterangan}</td>
                     <td>{item.pelanggan}</td>
                     <td>
-                      <a href={`/admin/denda/edit/${item.id}`} className="btn btn-warning btn-sm">Edit</a>
+                      <Link to={`/admin/denda/edit/${item.id}`} className="btn btn-warning btn-sm">Edit</Link>
                       <button className="btn btn-danger btn-sm ml-2" onClick={() => handleDelete(item.id)}>
                         Delete
                       </button>

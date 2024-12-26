@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Registrasi() {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nama: "",
@@ -31,6 +32,8 @@ function Registrasi() {
       });
       return;
     }
+
+    setLoading(true);
     try {
       const response = await axios.post(
         "http://localhost:8000/api/register",
@@ -67,6 +70,8 @@ function Registrasi() {
           confirmButtonText: "Coba Lagi",
         });
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -218,15 +223,19 @@ function Registrasi() {
                   </div>
                 </div>
                 <div className="mt-4 mb-0">
-                  <button className="btn btn-primary btn-block" type="submit">
-                    Create Account
+                  <button
+                    className="btn btn-primary btn-block"
+                    type="submit"
+                    disabled={loading}
+                  >
+                    {loading ? "Loading..." : "Membuat Akun"}
                   </button>
                 </div>
               </form>
             </div>
             <div className="card-footer text-center py-3">
               <div className="small">
-                <a href="/login">Sudah Punya Akun? Login!</a>
+                <Link to="/login">Sudah Punya Akun? Login!</Link>
               </div>
             </div>
           </div>

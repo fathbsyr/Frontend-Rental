@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 function Footer() {
   return (
     <div>
@@ -122,7 +123,7 @@ function Footer() {
                 </div>
               </div>
             </div>
-            <a href="/login-admin">Login Administrator</a>
+            <Link to="/login-admin">Login Administrator</Link>
           </div>
         </div>
       </div>

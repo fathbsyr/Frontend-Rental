@@ -4,6 +4,7 @@ import $ from "jquery";
 import "datatables.net";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Ulasan = () => {
   const tableRef = useRef(null);
@@ -53,9 +54,9 @@ const Ulasan = () => {
       <p className="mb-4">Ulasan Anda Kepada Kami</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-          <a href="/dashboard/ulasan/add" className="btn btn-primary btn-sm">
+          <Link to="/dashboard/ulasan/add" className="btn btn-primary btn-sm">
             Buat Ulasan Baru
-          </a>
+          </Link>
         </div>
         <div className="card-body">
           {loading ? (

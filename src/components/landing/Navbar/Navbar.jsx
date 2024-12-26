@@ -1,5 +1,6 @@
 import Topbar from "./Topbar";
 import Search from "./Search";
+import { Link } from "react-router-dom";
 function Navbar() {
   return (
     <div>
@@ -10,9 +11,9 @@ function Navbar() {
       <div className="container-fluid position-relative nav-bar p-0">
         <div className="position-relative px-lg-5" style={{ zIndex: 9 }}>
           <nav className="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-            <a href className="navbar-brand">
+            <Link to="/" className="navbar-brand">
               <h1 className="text-uppercase text-primary mb-1">El-Rental</h1>
-            </a>
+            </Link>
             <button
               type="button"
               className="navbar-toggler"
@@ -26,21 +27,21 @@ function Navbar() {
               id="navbarCollapse"
             >
               <div className="navbar-nav ml-auto py-0">
-                <a href="/" className="nav-item nav-link">
+                <Link to="/" className="nav-item nav-link">
                   Home
-                </a>
-                <a href="/about" className="nav-item nav-link">
+                </Link>
+                <Link to="/about" className="nav-item nav-link">
                   About
-                </a>
-                <a href="/cars" className="nav-item nav-link">
+                </Link>
+                <Link to="/cars" className="nav-item nav-link">
                   Cars
-                </a>
-                <a href="/contact" className="nav-item nav-link">
+                </Link>
+                <Link to="/contact" className="nav-item nav-link">
                   Contact
-                </a>
-                <a href="/login" className="nav-item nav-link">
+                </Link>
+                <Link to="/login" className="nav-item nav-link">
                   Login
-                </a>
+                </Link>
               </div>
             </div>
           </nav>

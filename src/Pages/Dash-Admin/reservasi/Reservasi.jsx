@@ -4,6 +4,7 @@ import "datatables.net";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Reservasi = () => {
   const tableRef = useRef(null);
@@ -118,9 +119,9 @@ const Reservasi = () => {
       <p className="mb-4">Tempat Pengelolaan Data Reservasi</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-          <a href="/admin/reservasi/add" className="btn btn-primary btn-sm">
+          <Link to="/admin/reservasi/add" className="btn btn-primary btn-sm">
             Tambah Data Reservasi
-          </a>
+          </Link>
         </div>
         <div className="card-body">
           {loading ? (
@@ -161,7 +162,7 @@ const Reservasi = () => {
                     <td>{item.tanggal_akhir}</td>
                     <td>{item.status}</td>
                     <td>
-                    <a href={`/admin/reservasi/edit/${item.id}`} className="btn btn-warning btn-sm">Edit</a>
+                    <Link to={`/admin/reservasi/edit/${item.id}`} className="btn btn-warning btn-sm">Edit</Link>
 
                       <button
                         className="btn btn-danger btn-sm ml-2"

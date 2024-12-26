@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function LoginAdmin() {
   const [email, setEmail] = useState("");
@@ -122,7 +123,7 @@ function LoginAdmin() {
               </div>
               <div className="card-footer text-center py-3">
                 <div className="small">
-                  <a href="register.html">Need an account? Sign up!</a>
+                  <Link to="register.html">Forgot Password</Link>
                 </div>
               </div>
             </div>

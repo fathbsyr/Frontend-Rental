@@ -30,7 +30,7 @@ function About() {
                 alt
               />
               <p>
-                Royal Cars hadir untuk memberikan pengalaman terbaik dalam
+                El-Rental hadir untuk memberikan pengalaman terbaik dalam
                 menyewa mobil. Dengan layanan profesional dan armada kendaraan
                 mewah yang terawat, kami siap memenuhi kebutuhan perjalanan
                 Anda, baik untuk urusan bisnis, liburan, maupun acara spesial

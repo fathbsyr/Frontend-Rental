@@ -4,6 +4,7 @@ import $ from "jquery";
 import "datatables.net";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Pelanggan = () => {
   const tableRef = useRef(null);
@@ -100,7 +101,7 @@ const Pelanggan = () => {
       <p className="mb-4">Tempat Pengelolaan Data Pelanggan</p>
       <div className="card shadow mb-4"> 
         <div className="card-header py-3">
-        <a href="/admin/pelanggan/add" className="btn btn-primary btn-sm" >Tambah Data Pelanggan</a>
+        <Link to="/admin/pelanggan/add" className="btn btn-primary btn-sm" >Tambah Data Pelanggan</Link>
         </div>
         <div className="card-header py-3">
           <h6 className="m-0 font-weight-bold text-primary">
@@ -146,7 +147,7 @@ const Pelanggan = () => {
                     <td>{item.no_hp}</td>
                     <td>{item.alamat_lengkap}</td>
                     <td>
-                      <a href={`/admin/pelanggan/edit/${item.id}`} className="btn btn-warning btn-sm">Edit</a>
+                      <Link to={`/admin/pelanggan/edit/${item.id}`} className="btn btn-warning btn-sm">Edit</Link>
                       <button className="btn btn-danger btn-sm ml-2" onClick={() => handleDelete(item.id)}>
                         Delete
                       </button>

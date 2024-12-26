@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function LoginPelanggan() {
   const [email, setEmail] = useState("");
@@ -123,7 +123,10 @@ function LoginPelanggan() {
               </div>
               <div className="card-footer text-center py-3">
                 <div className="small">
-                  <a href="/registrasi">Belum Punya Akun? Registrasi</a>
+                  <Link to="/forgot-password">Forgot Password</Link>
+                </div>
+                <div className="small">
+                  <Link to="/registrasi">Belum Punya Akun? Registrasi</Link>
                 </div>
               </div>
             </div>
