@@ -1,55 +1,23 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 const Cars = () => {
-    // Data array untuk mobil
-    const cars = [
-        {
-            name: "Mercedes Benz R3",
-            year: 2015,
-            transmission: "Automatic",
-            mileage: "25,000 KM",
-            price: "$99.00/Day",
-            image: "../src/assets/landing/img/car-rent-1.png"
-        },
-        {
-            name: "BMW X5",
-            year: 2018,
-            transmission: "Automatic",
-            mileage: "20,000 KM",
-            price: "$120.00/Day",
-            image: "../src/assets/landing/img/car-rent-2.png"
-        },
-        {
-            name: "Audi A4",
-            year: 2020,
-            transmission: "Manual",
-            mileage: "15,000 KM",
-            price: "$110.00/Day",
-            image: "../src/assets/landing/img/car-rent-3.png"
-        },
-        {
-            name: "Toyota Supra",
-            year: 2022,
-            transmission: "Manual",
-            mileage: "10,000 KM",
-            price: "$150.00/Day",
-            image: "../src/assets/landing/img/car-rent-4.png"
-        },
-        {
-            name: "Honda Civic",
-            year: 2021,
-            transmission: "Automatic",
-            mileage: "12,000 KM",
-            price: "$95.00/Day",
-            image: "../src/assets/landing/img/car-rent-5.png"
-        },
-        {
-            name: "Ford Mustang",
-            year: 2019,
-            transmission: "Automatic",
-            mileage: "18,000 KM",
-            price: "$180.00/Day",
-            image: "../src/assets/landing/img/car-rent-6.png"
-        }
-    ];
+    // State untuk menyimpan data mobil
+    const [cars, setCars] = useState([]);
+
+    // Ambil data dari API saat komponen dimuat
+    useEffect(() => {
+        axios
+            .get("http://localhost:8000/api/mobil")
+            .then((response) => {
+                // Akses properti "data" di dalam respons
+                console.log("Response Data:", response.data.data); // Pastikan data terlihat dengan benar
+                setCars(response.data.data); // Gunakan response.data.data
+            })
+            .catch((error) => {
+                console.error("Error fetching car data:", error);
+            });
+    }, []);     // Dependency array kosong agar hanya dijalankan sekali
 
     return (
         <div>
@@ -69,29 +37,31 @@ const Cars = () => {
                 <div className="container pt-5 pb-3">
                     <h1 className="display-4 text-uppercase text-center mb-5">Find Your Perfect Car</h1>
                     <div className="row">
-                        {cars.map((car, index) => (
-                            <div className="col-lg-4 col-md-6 mb-2" key={index}>
-                                <div className="rent-item mb-4">
-                                    <img className="img-fluid mb-4" src={car.image} alt={car.name} />
-                                    <h4 className="text-uppercase mb-4">{car.name}</h4>
-                                    <div className="d-flex justify-content-center mb-4">
-                                        <div className="px-2">
-                                            <i className="fa fa-car text-primary mr-1" />
-                                            <span>{car.year}</span>
+                        {cars.length > 0 ? (
+                            cars.map((car) => (
+                                <div className="col-lg-4 col-md-6 mb-2" key={car.id}>
+                                    <div className="rent-item mb-4">
+                                        {/* Jika ada properti gambar, gunakan */}
+                                        {/* <img className="img-fluid mb-4" src={car.image} alt={car.nama} /> */}
+                                        <h4 className="text-uppercase mb-4">{car.brand}</h4>
+                                        <h4 className="text-uppercase mb-4">{car.nama}</h4>
+                                        <div className="d-flex flex-column align-items-center mb-4">
+                                            <div className="py-2">
+                                                <i className={`fa ${car.ketersediaan === 'tersedia' ? 'fa-check-circle text-success' : 'fa-times-circle text-danger'} mr-1`} />
+                                                <span>{car.ketersediaan}</span>
+                                            </div>
+                                            <div className="py-2">
+                                                <i className="fa fa-info-circle text-primary mr-1" />
+                                                <span>{car.deskripsi || "Deskripsi tidak tersedia"}</span>
+                                            </div>
                                         </div>
-                                        <div className="px-2 border-left border-right">
-                                            <i className="fa fa-cogs text-primary mr-1" />
-                                            <span>{car.transmission}</span>
-                                        </div>
-                                        <div className="px-2">
-                                            <i className="fa fa-road text-primary mr-1" />
-                                            <span>{car.mileage}</span>
-                                        </div>
+                                        <a className="btn btn-primary px-3" href="#">Rp {car.harga.toLocaleString()}</a>
                                     </div>
-                                    <a className="btn btn-primary px-3" href="#">{car.price}</a>
                                 </div>
-                            </div>
-                        ))}
+                            ))
+                        ) : (
+                            <p className="text-center">No cars available.</p>
+                        )}
                     </div>
                 </div>
             </div>
