@@ -1,4 +1,5 @@
 import ListCar from "../../components/landing/Cars/Cars";
+import Contact from "./Contact";
 function Home() {
   return (
     <div>
@@ -75,7 +76,6 @@ function Home() {
       {/* About Start */}
       <div className="container-fluid py-5">
         <div className="container pt-5 pb-3">
-          <h1 className="display-1 text-primary text-center">01</h1>
           <h1 className="display-4 text-uppercase text-center mb-5">
             Welcome To <span className="text-primary">El-Rental</span>
           </h1>
@@ -168,6 +168,7 @@ function Home() {
         </div>
       </div>
       {/* Banner End */}
+      <Contact/>
     </div>
   );
 }

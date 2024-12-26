@@ -7,6 +7,8 @@ import LandingLayout from "./Layouts/LandingLayout";
 import LandingRoutes from "./Routes/LandingRoutes";
 import ProtectedRoutes from "./Routes/ProtectedRoutes";
 import LoginAdmin from "./Pages/Login/LoginAdmin/Login";
+import ForgotPasswordAdmin from "./Pages/Login/LoginAdmin/Forgot";
+import ResetPasswordAdmin from "./Pages/Login/LoginAdmin/Reset";
 import LoginPelanggan from "./Pages/Login/LoginPelanggan/Login";
 import Registrasi from "./Pages/Login/LoginPelanggan/Registrasi";
 import ForgotPassword from "./Pages/Login/LoginPelanggan/Forgot";
@@ -46,7 +48,11 @@ function App() {
             </LandingLayout>
           }
         />
+        {/* administrator */}
         <Route path="/login-admin" element={<LoginAdmin />} />
+        <Route path="/forgot-password-admin" element={<ForgotPasswordAdmin />} />
+        <Route path="/reset-password-admin" element={<ResetPasswordAdmin />} />
+        {/* pelanggan */}
         <Route path="/login" element={<LoginPelanggan />} />
         <Route path="/registrasi" element={<Registrasi />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
