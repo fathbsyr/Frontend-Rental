@@ -66,10 +66,12 @@ const Reservasi = () => {
           </Link>
         </div>
         <div className="card-body">
-          {loading ? (
+        {loading ? (
             <p>Loading...</p>
           ) : error ? (
-            <p className="text-danger">{error}</p>
+            <p>Error Occurred: {error}</p>
+          ) : reservasi.length === 0 ? ( 
+            <p>Anda belum mendapatkan tagihan.</p>
           ) : (
             <table ref={tableRef} className="display" style={{ width: "100%" }}>
               <thead>

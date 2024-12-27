@@ -59,10 +59,12 @@ const Ulasan = () => {
           </Link>
         </div>
         <div className="card-body">
-          {loading ? (
+        {loading ? (
             <p>Loading...</p>
           ) : error ? (
             <p>Error Occurred: {error}</p>
+          ) : ulasan.length === 0 ? ( 
+            <p>Anda belum membuat ulasan.</p>
           ) : (
             <table ref={tableRef} className="display" style={{ width: "100%" }}>
               <thead>

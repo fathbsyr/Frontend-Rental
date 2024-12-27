@@ -30,15 +30,12 @@ function AddReservasi() {
           }
         );
         const pelangganId = localStorage.getItem("pelanggan_id"); // Ambil id pelanggan dari localStorage
-         // Cek ID pelanggan yang digunakan untuk filter
-        // Filter denda berdasarkan ID pelanggan yang login
         const filteredPelanggan = pelangganResponse.data.data.filter(
-          (pelanggan) => {
-            return pelanggan.id === parseInt(pelangganId); // Filter berdasarkan ID pelanggan
-          }
+          (pelanggan) => pelanggan.id === parseInt(pelangganId) // Filter berdasarkan ID pelanggan
         );
         setPelanggan(filteredPelanggan); // Set pelanggan yang sudah difilter
         setFormData({ ...formData, pelanggan_id: filteredPelanggan[0]?.id });
+
         const mobilResponse = await axios.get(
           "http://localhost:8000/api/mobil",
           {
@@ -47,7 +44,11 @@ function AddReservasi() {
             },
           }
         );
-        setMobil(mobilResponse.data.data);
+        // Filter hanya mobil yang tersedia
+        const availableMobil = mobilResponse.data.data.filter(
+          (mobil) => mobil.ketersediaan === "tersedia" // Pastikan properti sesuai dengan API
+        );
+        setMobil(availableMobil); // Set mobil yang tersedia
       } catch (error) {
         setError(error.message);
       }

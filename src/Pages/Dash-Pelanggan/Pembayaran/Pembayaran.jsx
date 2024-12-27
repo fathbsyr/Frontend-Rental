@@ -61,7 +61,6 @@ const Pembayaran = () => {
     }
   }, [loading, error, pembayaran]);
 
-
   return (
     <div>
       <h1 className="h3 mb-2 text-gray-800">Tagihan</h1>
@@ -75,6 +74,8 @@ const Pembayaran = () => {
             <p>Loading...</p>
           ) : error ? (
             <p>Error Occurred: {error}</p>
+          ) : pembayaran.length === 0 ? ( 
+            <p>Anda belum mendapatkan tagihan.</p>
           ) : (
             <table ref={tableRef} className="display" style={{ width: "100%" }}>
               <thead>

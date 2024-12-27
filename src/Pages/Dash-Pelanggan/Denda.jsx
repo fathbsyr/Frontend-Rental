@@ -68,6 +68,8 @@ const Denda = () => {
             <p>Loading...</p>
           ) : error ? (
             <p>Error Occurred: {error}</p>
+          ) : denda.length === 0 ? ( 
+            <p>Selamat anda tidak mendapatkan denda</p>
           ) : (
             <table ref={tableRef} className="display" style={{ width: "100%" }}>
               <thead>

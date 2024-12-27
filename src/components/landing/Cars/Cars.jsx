@@ -25,7 +25,6 @@ function ListCar() {
       .get("http://localhost:8000/api/mobil")
       .then((response) => {
         // Akses properti "data" di dalam respons
-        console.log("Response Data:", response.data.data); // Pastikan data terlihat dengan benar
         setCars(response.data.data); // Gunakan response.data.data
       })
       .catch((error) => {
@@ -47,7 +46,7 @@ function ListCar() {
                   {/* <img className="img-fluid mb-4" src={car.image} alt={car.nama} /> */}
                   <img
                     className="img-fluid mb-4"
-                    src={CarImage[car.nama] || "./assets/cars/default.jpg"} // Gambar berdasarkan nama mobil
+                    src={CarImage[car.nama] || "./img/default.jpeg"} // Gambar berdasarkan nama mobil
                     alt={car.nama || "Mobil"}
                   />
                   <h4 className="text-uppercase mb-4">{car.brand}</h4>

@@ -41,30 +41,26 @@ function Footer() {
           <div className="col-lg-3 col-md-6 mb-5">
             <h4 className="text-uppercase text-light mb-4">Usefull Links</h4>
             <div className="d-flex flex-column justify-content-start">
-              <a className="text-body mb-2" href="#">
+              <Link className="text-body mb-2" to="/">
                 <i className="fa fa-angle-right text-white mr-2" />
-                Private Policy
-              </a>
-              <a className="text-body mb-2" href="#">
+                Home
+              </Link>
+              <Link className="text-body mb-2" to="/about">
                 <i className="fa fa-angle-right text-white mr-2" />
-                Term &amp; Conditions
-              </a>
-              <a className="text-body mb-2" href="#">
+                About
+              </Link>
+              <Link className="text-body mb-2" to="/cars">
                 <i className="fa fa-angle-right text-white mr-2" />
-                New Member Registration
-              </a>
-              <a className="text-body mb-2" href="#">
+                Cars
+              </Link>
+              <Link className="text-body mb-2" to="/contact">
                 <i className="fa fa-angle-right text-white mr-2" />
-                Affiliate Programme
-              </a>
-              <a className="text-body mb-2" href="#">
+                Contact
+              </Link>
+              <Link className="text-body mb-2" to="/login">
                 <i className="fa fa-angle-right text-white mr-2" />
-                Return &amp; Refund
-              </a>
-              <a className="text-body" href="#">
-                <i className="fa fa-angle-right text-white mr-2" />
-                Help &amp; FQAs
-              </a>
+                Login 
+              </Link>
             </div>
           </div>
           <div className="col-lg-3 col-md-6 mb-5">
@@ -103,10 +99,9 @@ function Footer() {
             </div>
           </div>
           <div className="col-lg-3 col-md-6 mb-5">
-            <h4 className="text-uppercase text-light mb-4">Newsletter</h4>
+            <h4 className="text-uppercase text-light mb-4">El-Rental</h4>
             <p className="mb-4">
-              Volup amet magna clita tempor. Tempor sea eos vero ipsum. Lorem
-              lorem sit sed elitr sed kasd et
+              Tempat Rental Mobil Mewah Terbaik Di Depok
             </p>
             <div className="w-100 mb-3">
               <div className="input-group">
@@ -117,9 +112,9 @@ function Footer() {
                   placeholder="Your Email"
                 />
                 <div className="input-group-append">
-                  <button className="btn btn-primary text-uppercase px-3">
+                  <Link to="/registrasi" className="btn btn-primary px-4 btn-lg">
                     Sign Up
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -129,7 +124,7 @@ function Footer() {
       </div>
       <div className="container-fluid bg-dark py-4 px-sm-3 px-md-5">
         <p className="mb-2 text-center text-body">
-          © <a href="#">El-Rental</a>. All Rights Reserved.
+          © <a href="/">El-Rental</a>. All Rights Reserved.
         </p>
         {/*/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. *** /*/}
         <p className="m-0 text-center text-body">

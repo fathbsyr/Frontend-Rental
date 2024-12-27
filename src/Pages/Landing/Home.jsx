@@ -1,5 +1,6 @@
 import ListCar from "../../components/landing/Cars/Cars";
 import Contact from "./Contact";
+import { Link } from "react-router-dom";
 function Home() {
   return (
     <div>
@@ -25,9 +26,9 @@ function Home() {
                   <h1 className="display-1 text-white mb-md-4">
                     Best Rental Cars In Your Location
                   </h1>
-                  <a href className="btn btn-primary py-md-3 px-md-5 mt-2">
+                  <Link to="/login" className="btn btn-primary py-md-3 px-md-5 mt-2">
                     Reserve Now
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -45,9 +46,9 @@ function Home() {
                   <h1 className="display-1 text-white mb-md-4">
                     Quality Cars with Unlimited Miles
                   </h1>
-                  <a href className="btn btn-primary py-md-3 px-md-5 mt-2">
+                  <Link to="/login" className="btn btn-primary py-md-3 px-md-5 mt-2">
                     Reserve Now
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
