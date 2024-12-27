@@ -2,7 +2,20 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+import alphard from "./img/alphard.png";
+import amg from "./img/amg-one.jpg";
+import gt3rs from "./img/gt3rs.jpg";
+import turbo from "./img/turbo-s.jpg";
+
 function ListCar() {
+  
+  const CarImage = {
+    "Alphard": alphard,
+    "AMG-One": amg,
+    "911 GT3 RS": gt3rs,
+    "911 Turbo S": turbo
+  };
+
   // State untuk menyimpan data mobil
   const [cars, setCars] = useState([]);
 
@@ -34,8 +47,8 @@ function ListCar() {
                   {/* <img className="img-fluid mb-4" src={car.image} alt={car.nama} /> */}
                   <img
                     className="img-fluid mb-4"
-                    src="https://image.jpnn.com/resize/570x380-80/arsip/watermark/2020/02/14/mobil-baru-mercedes-w11-foto-f1-68.jpg"
-                    alt="Mobil"
+                    src={CarImage[car.nama] || "./assets/cars/default.jpg"} // Gambar berdasarkan nama mobil
+                    alt={car.nama || "Mobil"}
                   />
                   <h4 className="text-uppercase mb-4">{car.brand}</h4>
                   <h4 className="text-uppercase mb-4">{car.nama}</h4>
