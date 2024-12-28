@@ -100,6 +100,7 @@ const Ulasan = () => {
           ) : error ? (
             <p>Error Occurred: {error}</p>
           ) : (
+            <div style={{ overflowX: "auto" }}>
             <table ref={tableRef} className="display" style={{ width: "100%" }}>
               <thead>
                 <tr>
@@ -131,7 +132,7 @@ const Ulasan = () => {
                         Edit
                       </a>
                       <button
-                        className="btn btn-danger btn-sm ml-2"
+                        className="btn btn-danger btn-sm m-2"
                         onClick={() => handleDelete(item.id)}
                       >
                         Delete
@@ -141,6 +142,7 @@ const Ulasan = () => {
                 ))}
               </tbody>
             </table>
+            </div>
           )}
         </div>
       </div>

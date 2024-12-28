@@ -66,6 +66,7 @@ const Ulasan = () => {
           ) : ulasan.length === 0 ? ( 
             <p>Anda belum membuat ulasan.</p>
           ) : (
+            <div style={{ overflowX: "auto" }}>
             <table ref={tableRef} className="display" style={{ width: "100%" }}>
               <thead>
                 <tr>
@@ -107,6 +108,7 @@ const Ulasan = () => {
                 ))}
               </tbody>
             </table>
+          </div>
           )}
         </div>
       </div>

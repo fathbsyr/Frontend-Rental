@@ -16,12 +16,15 @@ const Reservasi = () => {
     const fetchReservasi = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:8000/api/reservasi", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await axios.get(
+          "http://localhost:8000/api/reservasi",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
         if (response.data.success) {
           const pelangganId = localStorage.getItem("pelanggan_id"); // Ambil id pelanggan dari localStorage
 
@@ -54,59 +57,67 @@ const Reservasi = () => {
     }
   }, [loading, error, reservasi]);
 
-
   return (
     <div>
       <h1 className="h3 mb-2 text-gray-800">Reservasi</h1>
       <p className="mb-4">History Reservasi Anda</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-          <Link to="/dashboard/reservasi/add" className="btn btn-primary btn-sm">
+          <Link
+            to="/dashboard/reservasi/add"
+            className="btn btn-primary btn-sm"
+          >
             Buat Reservasi Baru
           </Link>
         </div>
         <div className="card-body">
-        {loading ? (
+          {loading ? (
             <p>Loading...</p>
           ) : error ? (
             <p>Error Occurred: {error}</p>
-          ) : reservasi.length === 0 ? ( 
-            <p>Anda belum mendapatkan tagihan.</p>
+          ) : reservasi.length === 0 ? (
+            <p>Anda belum membuat reservasi</p>
           ) : (
-            <table ref={tableRef} className="display" style={{ width: "100%" }}>
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Pelanggan</th>
-                  <th>Mobil</th>
-                  <th>Tanggal Mulai</th>
-                  <th>Tanggal Akhir</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>No</th>
-                  <th>Pelanggan</th>
-                  <th>Mobil</th>
-                  <th>Tanggal Mulai</th>
-                  <th>Tanggal Akhir</th>
-                  <th>Status</th>
-                </tr>
-              </tfoot>
-              <tbody>
-                {reservasi.map((item, index) => (
-                  <tr key={item.id}>
-                    <td>{index + 1}</td>
-                    <td>{item.pelanggan}</td>
-                    <td>{item.mobil}</td>
-                    <td>{item.tanggal_mulai}</td>
-                    <td>{item.tanggal_akhir}</td>
-                    <td>{item.status}</td>
+            <div style={{ overflowX: "auto" }}>
+              <table
+                ref={tableRef}
+                className="display"
+                style={{ width: "100%" }}
+              >
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Pelanggan</th>
+                    <th>Mobil</th>
+                    <th>Tanggal Mulai</th>
+                    <th>Tanggal Akhir</th>
+                    <th>Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>No</th>
+                    <th>Pelanggan</th>
+                    <th>Mobil</th>
+                    <th>Tanggal Mulai</th>
+                    <th>Tanggal Akhir</th>
+                    <th>Status</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  {reservasi.map((item, index) => (
+                    <tr key={item.id}>
+                      <td>{index + 1}</td>
+                      <td>{item.pelanggan}</td>
+                      <td>{item.mobil}</td>
+                      <td>{item.tanggal_mulai}</td>
+                      <td>{item.tanggal_akhir}</td>
+                      <td>{item.status}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       </div>

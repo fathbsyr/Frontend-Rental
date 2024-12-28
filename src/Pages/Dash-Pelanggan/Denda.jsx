@@ -68,34 +68,40 @@ const Denda = () => {
             <p>Loading...</p>
           ) : error ? (
             <p>Error Occurred: {error}</p>
-          ) : denda.length === 0 ? ( 
+          ) : denda.length === 0 ? (
             <p>Selamat anda tidak mendapatkan denda</p>
           ) : (
-            <table ref={tableRef} className="display" style={{ width: "100%" }}>
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Keterangan</th>
-                  <th>Pelanggan</th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>No</th>
-                  <th>Keterangan</th>
-                  <th>Pelanggan</th>
-                </tr>
-              </tfoot>
-              <tbody>
-                {denda.map((item, index) => (
-                  <tr key={item.id}>
-                    <td>{index + 1}</td>
-                    <td>{item.keterangan}</td>
-                    <td>{item.pelanggan}</td>
+            <div style={{ overflowX: "auto" }} className="table-responsive">
+              <table
+                ref={tableRef}
+                className="display"
+                style={{ width: "100%" }}
+              >
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Keterangan</th>
+                    <th>Pelanggan</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>No</th>
+                    <th>Keterangan</th>
+                    <th>Pelanggan</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  {denda.map((item, index) => (
+                    <tr key={item.id}>
+                      <td>{index + 1}</td>
+                      <td>{item.keterangan}</td>
+                      <td>{item.pelanggan}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       </div>

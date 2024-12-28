@@ -112,6 +112,7 @@ const Pembayaran = () => {
           ) : error ? (
             <p>Error Occurred: {error}</p>
           ) : (
+            <div style={{ overflowX: "auto" }}>
             <table ref={tableRef} className="display" style={{ width: "100%" }}>
               <thead>
                 <tr>
@@ -152,7 +153,7 @@ const Pembayaran = () => {
                     <td>{item.total_bayar}</td>
                     <td>
                       <Link to={`/admin/pembayaran/edit/${item.id}`}className="btn btn-warning btn-sm">Edit</Link>
-                      <button className="btn btn-danger btn-sm ml-2" onClick={() => handleDelete(item.id)}>
+                      <button className="btn btn-danger btn-sm m-2" onClick={() => handleDelete(item.id)}>
                         Delete
                       </button>
                     </td>
@@ -160,6 +161,7 @@ const Pembayaran = () => {
                 ))}
               </tbody>
             </table>
+            </div>
           )}
         </div>
       </div>

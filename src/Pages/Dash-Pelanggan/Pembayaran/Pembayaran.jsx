@@ -77,6 +77,7 @@ const Pembayaran = () => {
           ) : pembayaran.length === 0 ? ( 
             <p>Anda belum mendapatkan tagihan.</p>
           ) : (
+          <div style={{ overflowX: "auto" }}>
             <table ref={tableRef} className="display" style={{ width: "100%" }}>
               <thead>
                 <tr>
@@ -117,6 +118,7 @@ const Pembayaran = () => {
                 ))}
               </tbody>
             </table>
+          </div>
           )}
         </div>
       </div>

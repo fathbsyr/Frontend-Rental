@@ -50,12 +50,12 @@ function Navbar() {
         <Dropdown>
           <Dropdown.Toggle
             id="userDropdown"
-            className="nav-link dropdown-toggle text-gray-600 small"
+            className="nav-link dropdown-toggle text-gray-600 d-flex align-items-center"
             as="a"
             role="button"
           >
-            <span className="mr-2 d-none d-lg-inline">
-              {isLoading ? "Loading..." : name || error || "Unknown Admin"}
+            <span className="mr-2">
+              {isLoading ? "Loading..." : name || error || "Unknown Pelanggan"}
             </span>
           </Dropdown.Toggle>
           <Dropdown.Menu className="dropdown-menu-right shadow animated--grow-in">

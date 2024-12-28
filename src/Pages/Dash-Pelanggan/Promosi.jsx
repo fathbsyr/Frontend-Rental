@@ -44,39 +44,49 @@ function Promosi() {
       <p className="mb-4">Diskon Yang Tersedia</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-          <h6 className="m-0 font-weight-bold text-primary">Data Mobil Yang Berdiskon</h6>
+          <h6 className="m-0 font-weight-bold text-primary">
+            Data Mobil Yang Berdiskon
+          </h6>
         </div>
         <div className="card-body">
           {loading ? (
             <p>Loading...</p>
           ) : error ? (
             <p>Error Occurred: {error}</p>
-          ) : (
-            <table ref={tableRef} className="display" style={{ width: "100%" }}>
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Mobil</th>
-                  <th>Diskon</th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>No</th>
-                  <th>Mobil</th>
-                  <th>Diskon</th>
-                </tr>
-              </tfoot>
-              <tbody>
-                {promosi.map((item, index) => (
-                  <tr key={item.id}>
-                    <td>{index + 1}</td>
-                    <td>{item.mobil}</td>
-                    <td>{item.diskon}</td>
+          ) : promosi.length === 0 ? (
+            <p> Promosi belum tersedia</p>
+          ) : (  
+            <div style={{ overflowX: "auto" }}>
+              <table
+                ref={tableRef}
+                className="display"
+                style={{ width: "100%" }}
+              >
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Mobil</th>
+                    <th>Diskon</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>No</th>
+                    <th>Mobil</th>
+                    <th>Diskon</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  {promosi.map((item, index) => (
+                    <tr key={item.id}>
+                      <td>{index + 1}</td>
+                      <td>{item.mobil}</td>
+                      <td>{item.diskon}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       </div>

@@ -104,6 +104,7 @@ const Denda = () => {
           ) : error ? (
             <p>Error Occurred: {error}</p>
           ) : (
+          <div style={{ overflowX: "auto" }}>
             <table ref={tableRef} className="display" style={{ width: "100%" }}>
               <thead>
                 <tr>
@@ -129,7 +130,7 @@ const Denda = () => {
                     <td>{item.pelanggan}</td>
                     <td>
                       <Link to={`/admin/denda/edit/${item.id}`} className="btn btn-warning btn-sm">Edit</Link>
-                      <button className="btn btn-danger btn-sm ml-2" onClick={() => handleDelete(item.id)}>
+                      <button className="btn btn-danger btn-sm m-2" onClick={() => handleDelete(item.id)}>
                         Delete
                       </button>
                     </td>
@@ -137,6 +138,7 @@ const Denda = () => {
                 ))}
               </tbody>
             </table>
+          </div>
           )}
         </div>
       </div>

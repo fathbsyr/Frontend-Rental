@@ -129,6 +129,7 @@ const Reservasi = () => {
           ) : error ? (
             <p className="text-danger">{error}</p>
           ) : (
+            <div style={{ overflowX: "auto" }}>
             <table ref={tableRef} className="display" style={{ width: "100%" }}>
               <thead>
                 <tr>
@@ -165,7 +166,7 @@ const Reservasi = () => {
                     <Link to={`/admin/reservasi/edit/${item.id}`} className="btn btn-warning btn-sm">Edit</Link>
 
                       <button
-                        className="btn btn-danger btn-sm ml-2"
+                        className="btn btn-danger btn-sm m-2"
                         onClick={() => handleDelete(item.id)}
                       >
                         Delete
@@ -175,6 +176,7 @@ const Reservasi = () => {
                 ))}
               </tbody>
             </table>
+            </div>
           )}
         </div>
       </div>

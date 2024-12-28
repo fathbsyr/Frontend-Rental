@@ -161,9 +161,9 @@ function Home() {
               <p className="mb-4">
                 Only for Sunday from 1st Jan to 30th Jan 2045
               </p>
-              <a className="btn btn-primary mt-2 py-3 px-5" href>
+              <Link className="btn btn-primary mt-2 py-3 px-5" to='/registrasi'>
                 Register Now
-              </a>
+              </Link>
             </div>
           </div>
         </div>

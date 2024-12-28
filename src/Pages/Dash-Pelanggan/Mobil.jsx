@@ -38,57 +38,62 @@ const Mobil = () => {
     }
   }, [loading, error, mobil]);
 
-
   return (
     <div>
       <h1 className="h3 mb-2 text-gray-800">Mobil</h1>
       <p className="mb-4">Mobil-Mobil Mewah Yang Tersedia</p>
       <div className="card shadow mb-4">
         <div className="card-header py-3">
-          <h6 className="m-0 font-weight-bold text-primary">
-            Mobil
-          </h6>
+          <h6 className="m-0 font-weight-bold text-primary">Mobil</h6>
         </div>
         <div className="card-body">
           {loading ? (
             <p>Loading...</p>
           ) : error ? (
             <p>Error Occurred: {error}</p>
-          ) : (
-            <table ref={tableRef} className="display" style={{ width: "100%" }}>
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Brand</th>
-                  <th>Nama</th>
-                  <th>Harga</th>
-                  <th>Ketersediaan</th>
-                  <th>Deskripsi</th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>No</th>
-                  <th>Brand</th>
-                  <th>Nama</th>
-                  <th>Harga</th>
-                  <th>Ketersediaan</th>
-                  <th>Deskripsi</th>
-                </tr>
-              </tfoot>
-              <tbody>
-                {mobil.map((item, index) => (
-                  <tr key={item.id}>
-                    <td>{index + 1}</td>
-                    <td>{item.brand}</td>
-                    <td>{item.nama}</td>
-                    <td>{item.harga}</td>
-                    <td>{item.ketersediaan}</td>
-                    <td>{item.deskripsi}</td>
+          ) : mobil.length === 0 ? (
+            <p>Mobil belum tersedia</p> 
+          ) : (  
+            <div style={{ overflowX: "auto" }}>
+              <table
+                ref={tableRef}
+                className="display"
+                style={{ width: "100%" }}
+              >
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Brand</th>
+                    <th>Nama</th>
+                    <th>Harga</th>
+                    <th>Ketersediaan</th>
+                    <th>Deskripsi</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>No</th>
+                    <th>Brand</th>
+                    <th>Nama</th>
+                    <th>Harga</th>
+                    <th>Ketersediaan</th>
+                    <th>Deskripsi</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  {mobil.map((item, index) => (
+                    <tr key={item.id}>
+                      <td>{index + 1}</td>
+                      <td>{item.brand}</td>
+                      <td>{item.nama}</td>
+                      <td>{item.harga}</td>
+                      <td>{item.ketersediaan}</td>
+                      <td>{item.deskripsi}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       </div>
