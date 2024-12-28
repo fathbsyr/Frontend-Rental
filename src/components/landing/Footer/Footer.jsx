@@ -24,18 +24,21 @@ function Footer() {
             </p>
             <h6 className="text-uppercase text-white py-2">Follow Us</h6>
             <div className="d-flex justify-content-start">
-              <a className="btn btn-lg btn-dark btn-lg-square mr-2" href="#">
-                <i className="fab fa-twitter" />
-              </a>
-              <a className="btn btn-lg btn-dark btn-lg-square mr-2" href="#">
+              <Link className="btn btn-lg btn-dark btn-lg-square mr-2" target='_blank' to="https://x.com/">
+                <i className="fab fa-x-twitter" />
+              </Link>
+              <Link className="btn btn-lg btn-dark btn-lg-square mr-2" target='_blank' to="https://web.facebook.com/">
                 <i className="fab fa-facebook-f" />
-              </a>
-              <a className="btn btn-lg btn-dark btn-lg-square mr-2" href="#">
+              </Link>
+              <Link className="btn btn-lg btn-dark btn-lg-square mr-2" target='_blank' to="https://www.linkedin.com/">
                 <i className="fab fa-linkedin-in" />
-              </a>
-              <a className="btn btn-lg btn-dark btn-lg-square" href="#">
+              </Link>
+              <Link className="btn btn-lg btn-dark btn-lg-square mr-2" target='_blank' to="https://instagram.com">
                 <i className="fab fa-instagram" />
-              </a>
+              </Link>
+              <Link className="btn btn-lg btn-dark btn-lg-square" target='_blank' to="https://youtube.com">
+                <i className="fab fa-youtube" />
+              </Link>
             </div>
           </div>
           <div className="col-lg-3 col-md-6 mb-5">
