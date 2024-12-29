@@ -118,7 +118,7 @@ const Pembayaran = () => {
                 <tr>
                   <th>No</th>
                   <th>Metode</th>
-                  <th>Tanggal Bayar</th>
+                  <th>Tanggal Maksimal Pembayaran</th>
                   <th>Status</th>
                   <th>Pelanggan</th>
                   <th>Diskon</th>
@@ -131,7 +131,7 @@ const Pembayaran = () => {
                 <tr>
                   <th>No</th>
                   <th>Metode</th>
-                  <th>Tanggal Bayar</th>
+                  <th>Tanggal Maksimal Pembayaran</th>
                   <th>Status</th>
                   <th>Pelanggan</th>
                   <th>Diskon</th>

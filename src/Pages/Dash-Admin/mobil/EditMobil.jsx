@@ -11,9 +11,10 @@ function EditMobil() {
     { id: 2, value: "kosong", label: "Tidak Tersedia" },
   ];
   const [error, setError] = useState(null);
+  const [brand, setBrand] = useState([]);
 
   const [formData, setFormData] = useState({
-    brand: "",
+    brand_id: "",
     nama: "",
     harga: "",
     ketersediaan: "",
@@ -30,6 +31,14 @@ function EditMobil() {
       return;
     }
 
+    const fetchBrand = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/brand");
+        setBrand(response.data.data);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
     const fetchEditMobil = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -44,7 +53,7 @@ function EditMobil() {
         );
         if (response.data.success && response.data.data.length > 0) {
           setFormData({
-            brand: response.data.data[0].brand || "",
+            brand_id: response.data.data[0].brand_id || "",
             nama: response.data.data[0].nama || "",
             harga: response.data.data[0].harga || "",
             ketersediaan: response.data.data[0].ketersediaan || "",
@@ -58,6 +67,7 @@ function EditMobil() {
       }
     };
     fetchEditMobil();
+    fetchBrand();
   }, [id]);
 
   const handleChange = (e) => {
@@ -113,14 +123,20 @@ function EditMobil() {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="brand">Brand</label>
-          <input
-            id="brand"
-            name="brand"
-            type="text"
-            value={formData.brand}
+          <select
+            id="brand_id"
+            name="brand_id"
+            className="custom-select"
+            value={formData.brand_id}
             onChange={handleChange}
-            className="form-control"
-          />
+          >
+            <option value="">Pilih Brand</option> {/* Opsi default kosong */}
+            {brand.map((option) => (
+              <option key={option.id} value={option.id}>
+                {option.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="nama">Nama</label>
@@ -135,6 +151,7 @@ function EditMobil() {
         </div>
         <div className="form-group">
           <label htmlFor="harga">Harga</label>
+          <p>*minimal 10000000</p>
           <input
             id="harga"
             name="harga"

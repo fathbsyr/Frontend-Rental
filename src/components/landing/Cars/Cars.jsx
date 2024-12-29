@@ -6,6 +6,7 @@ import alphard from "./img/alphard.png";
 import amg from "./img/amg-one.jpg";
 import gt3rs from "./img/gt3rs.jpg";
 import turbo from "./img/turbo-s.jpg";
+import defaultImage from "./img/default.jpeg";
 
 function ListCar() {
   
@@ -37,6 +38,7 @@ function ListCar() {
         <h1 className="display-4 text-uppercase text-center mb-5">
           Find Your Perfect Car
         </h1>
+        <p style={{ color: "red" }}>*gambar hanya ilustrasi</p>
         <div className="row">
           {cars.length > 0 ? (
             cars.map((car) => (
@@ -46,7 +48,7 @@ function ListCar() {
                   {/* <img className="img-fluid mb-4" src={car.image} alt={car.nama} /> */}
                   <img
                     className="img-fluid mb-4"
-                    src={CarImage[car.nama] || "./img/default.jpeg"} // Gambar berdasarkan nama mobil
+                    src={CarImage[car.nama] || defaultImage} // Gambar berdasarkan nama mobil
                     alt={car.nama || "Mobil"}
                   />
                   <h4 className="text-uppercase mb-4">{car.brand}</h4>

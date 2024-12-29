@@ -65,7 +65,7 @@ function ResetPasswordAdmin() {
           icon: "success",
           confirmButtonText: "OK",
         }).then(() => {
-          navigate("/login");
+          navigate("/login-admin");
         });
       } else {
         Swal.fire({

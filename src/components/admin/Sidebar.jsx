@@ -30,6 +30,14 @@ function Sidebar() {
         {/* Divider */}
         <hr className="sidebar-divider" />
 
+        {/* Nav Item - brand */}
+        <li className="nav-item">
+          <Link to="/admin/brand" className="nav-link">
+            <i className="fas fa-fw fa-globe"></i>
+            <span>Brand</span>
+          </Link>
+        </li>
+        
         {/* Nav Item - mobil */}
         <li className="nav-item">
           <Link to="/admin/mobil" className="nav-link">

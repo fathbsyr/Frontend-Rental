@@ -126,7 +126,7 @@ function AddPembayaran() {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="tanggal_bayar">Tanggal Bayar</label>
+          <label htmlFor="tanggal_bayar">Tanggal Maksimal Pembayaran</label>
           <input
             id="tanggal_bayar"
             name="tanggal_bayar"
@@ -209,10 +209,12 @@ function AddPembayaran() {
         </div>
         <div className="form-group">
           <label htmlFor="total_bayar">Total Bayar</label>
+          <p>*minimal bayar 10000000</p>
           <input
             id="total_bayar"
             name="total_bayar"
             type="number"
+            min='10000000'
             value={formData.total_bayar}
             onChange={handleChange}
             className="form-control"

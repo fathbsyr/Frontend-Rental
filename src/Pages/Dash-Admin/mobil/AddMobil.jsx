@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 function AddMobil() {
+  const [error, setError] = useState({});
+  const [brand, setBrand] = useState([]);
   const [mobil, setMobil] = useState({
-    brand: "",
+    brand_id: "",
     nama: "",
     harga: "",
     ketersediaan: "",
@@ -18,8 +20,26 @@ function AddMobil() {
     { id: 2, value: "kosong", label: "Tidak Tersedia" },
   ];
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setMobil({ ...mobil, [name]: value });
+  };
+
+  useEffect(() => {
+    const fetchBrand = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/brand");
+        setBrand(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchBrand();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Mobil Data:", mobil);
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
@@ -28,6 +48,7 @@ function AddMobil() {
         {
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         }
       );
@@ -53,7 +74,7 @@ function AddMobil() {
       Swal.fire({
         title: "Terjadi Kesalahan!",
         text:
-          err.response?.data?.message ||
+          error.response?.data?.message ||
           "Tidak dapat terhubung ke server. Periksa koneksi internet Anda.",
         icon: "error",
         confirmButtonText: "Coba Lagi",
@@ -67,14 +88,20 @@ function AddMobil() {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="brand">Brand</label>
-          <input
-            id="brand"
-            name="brand"
-            type="text"
-            value={mobil.brand}
-            onChange={(e) => setMobil({ ...mobil, brand: e.target.value })}
-            className="form-control"
-          />
+          <select
+            id="brand_id"
+            name="brand_id"
+            className="custom-select"
+            value={mobil.brand_id}
+            onChange={handleChange}
+          >
+            <option value="">Pilih Brand</option> {/* Opsi default kosong */}
+            {brand.map((option) => (
+              <option key={option.id} value={option.id}>
+                {option.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="nama">Nama</label>
@@ -83,19 +110,20 @@ function AddMobil() {
             name="nama"
             type="text"
             value={mobil.nama}
-            onChange={(e) => setMobil({ ...mobil, nama: e.target.value })}
+            onChange={handleChange}
             className="form-control"
           />
         </div>
         <div className="form-group">
           <label htmlFor="harga">Harga</label>
+          <p>*minimal harga 10000000</p>
           <input
             id="harga"
             name="harga"
             type="number"
             min="10000000"
             value={mobil.harga}
-            onChange={(e) => setMobil({ ...mobil, harga: e.target.value })}
+            onChange={handleChange}
             className="form-control"
           />
         </div>
@@ -106,9 +134,7 @@ function AddMobil() {
             name="ketersediaan"
             className="custom-select"
             value={mobil.ketersediaan}
-            onChange={(e) =>
-              setMobil({ ...mobil, ketersediaan: e.target.value })
-            }
+            onChange={handleChange}
           >
             <option value="">Pilih Ketersediaan</option>
             {ketersediaanOptions.map((option) => (
@@ -125,7 +151,7 @@ function AddMobil() {
             name="deskripsi"
             type="text"
             value={mobil.deskripsi}
-            onChange={(e) => setMobil({ ...mobil, deskripsi: e.target.value })}
+            onChange={handleChange}
             className="form-control"
           />
         </div>

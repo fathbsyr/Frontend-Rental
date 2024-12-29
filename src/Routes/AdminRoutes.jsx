@@ -1,5 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "../Pages/Dash-Admin/Dashboard";
+import Brand from "../Pages/Dash-Admin/brand/Brand";
+import AddBrand from "../Pages/Dash-Admin/brand/AddBrand";
+import EditBrand from "../Pages/Dash-Admin/brand/EditBrand";
 import Mobil from "../Pages/Dash-Admin/mobil/Mobil";
 import AddMobil from "../Pages/Dash-Admin/mobil/AddMobil";
 import Reservasi from "../Pages/Dash-Admin/reservasi/Reservasi";
@@ -26,6 +29,9 @@ const AdminRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Dashboard />} />
+      <Route path="brand" element={<Brand />} />
+      <Route path="brand/add" element={<AddBrand />} />
+      <Route path="brand/edit/:id" element={<EditBrand />} />
       <Route path="mobil" element={<Mobil />} />
       <Route path="mobil/add" element={<AddMobil />} />
       <Route path="mobil/edit/:id" element={<EditMobil />} />

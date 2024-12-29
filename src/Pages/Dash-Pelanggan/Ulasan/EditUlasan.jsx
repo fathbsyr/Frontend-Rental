@@ -98,7 +98,7 @@ function EditUlasan() {
           icon: "success",
           confirmButtonText: "OK",
         }).then(() => {
-          navigate("/admin/ulasan");
+          navigate("/dashboard/ulasan");
         });
       } else {
         Swal.fire({
