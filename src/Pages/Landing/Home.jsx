@@ -1,4 +1,5 @@
 import ListCar from "../../components/landing/Cars/Cars";
+import Ulasan from "../../components/landing/Testi/Ulasan";
 import Contact from "./Contact";
 import { Link } from "react-router-dom";
 function Home() {
@@ -169,6 +170,7 @@ function Home() {
         </div>
       </div>
       {/* Banner End */}
+      <Ulasan/>
       <Contact/>
     </div>
   );
